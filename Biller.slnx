@@ -5,7 +5,7 @@
   <Folder Name="/2. Infrastructure/" />
   <Folder Name="/3. Application/">
     <Project Path="Biller.Application.UseCase/Biller.Application.UseCase.csproj" />
-    <Project Path="Biller.Presentation.Models/Biller.Presentation.Models.csproj" />
+    <Project Path="Biller.Presentation.Models/Biller.Application.Models.csproj" />
   </Folder>
   <Folder Name="/4. Domain/">
     <Project Path="Biller.Domain/Biller.Domain.csproj" />
