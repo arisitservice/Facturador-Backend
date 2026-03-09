@@ -1,0 +1,120 @@
+﻿# ==========================================
+# .NET / MSBuild
+# ==========================================
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ==========================================
+# Visual Studio
+# ==========================================
+.vs/
+*.rsuser
+*.vsp
+*.vspx
+*.sap
+*.ncb
+*.aps
+*.pch
+*.sbr
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+[Bb]uild/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# ==========================================
+# NuGet
+# ==========================================
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+!**/packages/build/
+
+# ==========================================
+# ASP.NET Core
+# ==========================================
+**/Properties/launchSettings.json
+appsettings.Development.json
+appsettings.Local.json
+
+# ==========================================
+# Publicacion / Deploy
+# ==========================================
+**/publish/
+**/PublishProfiles/
+*.pubxml
+*.pubxml.user
+*.publishsettings
+
+# ==========================================
+# Cobertura y pruebas
+# ==========================================
+.coverage
+*.coveragexml
+coverage*/
+TestResults/
+*.trx
+*.opencover.xml
+
+# ==========================================
+# ReSharper
+# ==========================================
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# ==========================================
+# Rider
+# ==========================================
+.idea/
+*.sln.iml
+
+# ==========================================
+# Windows
+# ==========================================
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# ==========================================
+# macOS
+# ==========================================
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ==========================================
+# Secretos / Configuracion local
+# ==========================================
+*.pfx
+*.p12
+secrets.json
+*secrets*.json
+.env
+.env.*
+!.env.example

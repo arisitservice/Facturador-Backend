@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/1. Presentation/">
+    <Project Path="Biller.Presentation.Api/Biller.Presentation.Api.csproj" />
+  </Folder>
+  <Folder Name="/2. Infrastructure/" />
+  <Folder Name="/3. Application/">
+    <Project Path="Biller.Application.UseCase/Biller.Application.UseCase.csproj" />
+    <Project Path="Biller.Presentation.Models/Biller.Presentation.Models.csproj" />
+  </Folder>
+  <Folder Name="/4. Domain/">
+    <Project Path="Biller.Domain/Biller.Domain.csproj" />
+  </Folder>
+</Solution>
