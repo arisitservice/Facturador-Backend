@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Biller.Presentation.Models\Biller.Application.Models.csproj" />
+    <ProjectReference Include="..\Biller.Application.Models\Biller.Application.Models.csproj" />
   </ItemGroup>
 
 </Project>
