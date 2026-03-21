@@ -21,4 +21,15 @@ public class FacturacionController : ControllerBase
         var xml = _crearComprobanteUseCase.Create();
         return Content(xml, "application/xml");
     }
+
+    [HttpGet("test")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public IActionResult Test()
+    {
+        return Ok(new
+        {
+            status = 200,
+            data = new { message = "Hola mundo dsesde .NET !!!!" }
+        });
+    }
 }
