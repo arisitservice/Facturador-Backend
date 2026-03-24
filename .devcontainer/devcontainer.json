@@ -1,0 +1,16 @@
+{
+	"name": "dotnet-api",
+	"image": "mcr.microsoft.com/devcontainers/dotnet:10.0",
+	"forwardPorts": [8080, 8081],
+	"portsAttributes": {
+		"8080": { "label": "HTTP" },
+		"8081": { "label": "HTTPS" }
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": ["ms-dotnettools.csharp", "ms-dotnettools.csdevkit"]
+		}
+	},
+	"postCreateCommand": "dotnet restore",
+	"remoteUser": "vscode"
+}
