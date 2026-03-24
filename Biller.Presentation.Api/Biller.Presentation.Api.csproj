@@ -8,10 +8,15 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Biller.Application.UseCase\Biller.Application.UseCase.csproj" />
+    <ProjectReference Include="..\Biller.Infrastructure\Biller.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

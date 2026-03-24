@@ -9,6 +9,8 @@ public static class DependencyInjection
     public static IServiceCollection AddUseCases(this IServiceCollection services)
     {
         services.AddScoped<ICrearComprobanteUseCase, CrearComprobanteUseCase>();
+        services.AddScoped<IReceptoresUseCase, ReceptoresUseCase>();
+
         return services;
     }
 }

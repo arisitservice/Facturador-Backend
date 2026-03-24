@@ -4,8 +4,6 @@ namespace Biller.Domain.Entities;
 
 public class Cfdi
 {
-    //public const string ClaveServFactSat  = "84111506";
-    //public const string ClaveUnidadActSat = "ACT";
 
     public int Id { get; set; }
     public string UUID { get; set; }
@@ -26,8 +24,8 @@ public class Cfdi
     public int             CreatedBy         { get; set; }
     public DateTime        CreatedAt         { get; set; }
 
-    public ICollection<CfdiConcepto> Conceptos { get; set; } = [];
-    public ICollection<CfdiComplementoPago> ComplementosPago { get; set; } = [];
+    public ICollection<CfdiConcepto> Conceptos { get; set; }
+    public ICollection<CfdiComplementoPago> ComplementosPago { get; set; }
 
     public Receptor Receptor { get; set; }
     public Emisor Emisor { get; set; }

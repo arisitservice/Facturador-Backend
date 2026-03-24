@@ -1,13 +1,16 @@
 <Solution>
   <Folder Name="/1. Presentation/">
-    <Project Path="Biller.Presentation.Api/Biller.Presentation.Api.csproj" />
+    <Project Path="D:/CITSolutions/Facturador/Biller/Biller.Presentation.Api/Biller.Presentation.Api.csproj" />
   </Folder>
-  <Folder Name="/2. Infrastructure/" />
+  <Folder Name="/2. Infrastructure/">
+    <Project Path="D:/CITSolutions/Facturador/Biller/Biller.Infrastructure/Biller.Infrastructure.csproj" Id="7aab0dec-8c25-4d4b-867a-224512a92d2d" />
+  </Folder>
   <Folder Name="/3. Application/">
-    <Project Path="Biller.Application.Models/Biller.Application.Models.csproj" />
-    <Project Path="Biller.Application.UseCase/Biller.Application.UseCase.csproj" />
+    <Project Path="Biller.Application.Infrastructure.Interface/Biller.Application.Infrastructure.Interface.csproj" Id="4e0ab495-0d2e-4ba4-b585-ac0ff0a5375d" />
+    <Project Path="D:/CITSolutions/Facturador/Biller/Biller.Application.Models/Biller.Application.Models.csproj" />
+    <Project Path="D:/CITSolutions/Facturador/Biller/Biller.Application.UseCase/Biller.Application.UseCase.csproj" />
   </Folder>
   <Folder Name="/4. Domain/">
-    <Project Path="Biller.Domain/Biller.Domain.csproj" />
+    <Project Path="D:/CITSolutions/Facturador/Biller/Biller.Domain/Biller.Domain.csproj" />
   </Folder>
 </Solution>

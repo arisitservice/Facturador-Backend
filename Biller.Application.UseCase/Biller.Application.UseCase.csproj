@@ -11,7 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Biller.Application.Infrastructure.Interface\Biller.Application.Infrastructure.Interface.csproj" />
     <ProjectReference Include="..\Biller.Application.Models\Biller.Application.Models.csproj" />
+    <ProjectReference Include="..\Biller.Domain\Biller.Domain.csproj" />
   </ItemGroup>
 
 </Project>

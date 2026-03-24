@@ -1,10 +1,10 @@
 using Biller.Application.UseCase.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Biller.Presentation.Api.Controllers;
+namespace Biller.Presentation.Api.Controllers.v1;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/v1/[controller]")]
 public class FacturacionController : ControllerBase
 {
     private readonly ICrearComprobanteUseCase _crearComprobanteUseCase;

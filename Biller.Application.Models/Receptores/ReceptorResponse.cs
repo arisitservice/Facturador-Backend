@@ -1,7 +1,6 @@
-﻿
-namespace Biller.Domain.Entities;
+namespace Biller.Application.Models.Receptores;
 
-public class Receptor
+public class ReceptorResponse
 {
     public int Id { get; set; }
     public string DomicilioFiscal { get; set; }
@@ -9,15 +8,6 @@ public class Receptor
     public string Nombre { get; set; }
     public string RazonSocial { get; set; }
     public string Rfc { get; set; }
-
-
-    //Foreign Keys
     public int IdRegimenFiscal { get; set; }
     public int IdUsoCfdi { get; set; }
-
-
-    //Relationships
-    public IList<Cfdi> Cfdis { get; set; }
-    public RegimenFiscal RegimenFiscal { get; set; }
-    public UsoCfdi UsoCfdi { get; set; }
 }

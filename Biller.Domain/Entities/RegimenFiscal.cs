@@ -8,4 +8,7 @@ public class RegimenFiscal
     public int ClaveSat { get; set; }
     public string Descripcion { get; set; }
     public Estatus Estatus { get; set; }
+
+    //Relationships
+    public IList<Receptor> Receptores { get; set; }
 }

@@ -34,7 +34,7 @@ public class CrearComprobanteUseCase : ICrearComprobanteUseCase
                 Nombre = "EMPRESA DEMO SA DE CV",
                 RegimenFiscal = "601"
             },
-            Receptor = new Receptor
+            Receptor = new global::Receptor
             {
                 Rfc = "XAXX010101000",
                 Nombre = "CLIENTE PUBLICO EN GENERAL",
