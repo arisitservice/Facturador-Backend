@@ -17,8 +17,8 @@ public class ReceptoresController : MainController
     }
 
     [HttpPost("Create")]
-    [ProducesResponseType<ReceptorResponse>(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType<Response<ReceptorResponse>>(StatusCodes.Status201Created)]
+    [ProducesResponseType<Response<ReceptorResponse>>(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Create([FromBody] ReceptorRequest request)
     {
         var response = new Response<ReceptorResponse>();
