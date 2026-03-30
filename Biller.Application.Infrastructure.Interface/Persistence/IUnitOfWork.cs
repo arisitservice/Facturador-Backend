@@ -4,6 +4,7 @@ namespace Biller.Application.Infrastructure.Interface.Persistence;
 
 public interface IUnitOfWork
 {
-    IReceptorRepository Receptores { get; }
+    IClientRepository Receptores { get; }
+    ITaxRegimeRepository TaxRegimes { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

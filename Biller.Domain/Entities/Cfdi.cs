@@ -1,3 +1,4 @@
+using Biller.Domain.Entities.TenantsContext;
 using Biller.Domain.Enums;
 
 namespace Biller.Domain.Entities;
@@ -17,7 +18,7 @@ public class Cfdi
     public int             IdMedioPago       { get; set; }
     public MetodoPago      MetodoPago        { get; set; }
     public ObjetoImpuesto  ObjetoImpuesto    { get; set; }
-    public Estatus         Estatus           { get; set; }
+    public Status         Estatus           { get; set; }
     public EstatusTimbrado EstatusTimbrado   { get; set; }
     public EstatusPago     EstatusPago       { get; set; }
     public string?         Notas             { get; set; }
@@ -27,7 +28,7 @@ public class Cfdi
     public ICollection<CfdiConcepto> Conceptos { get; set; }
     public ICollection<CfdiComplementoPago> ComplementosPago { get; set; }
 
-    public Receptor Receptor { get; set; }
+    public Client Receptor { get; set; }
     public Emisor Emisor { get; set; }
 
 }

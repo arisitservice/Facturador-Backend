@@ -1,5 +1,6 @@
-using Biller.Domain.Entities;
+using Biller.Domain.Entities.TenantsContext;
 using Biller.Domain.Enums;
+using Biller.Infrastructure.Persistence.Context;
 using Biller.Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,14 +13,13 @@ public static class ApplicationDbSeeder
     public static async Task SeedAsync(IServiceProvider serviceProvider)
     {
         using var scope  = serviceProvider.CreateScope();
-        var context      = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        var logger       = scope.ServiceProvider.GetRequiredService<ILogger<ApplicationDbContext>>();
+        var context      = scope.ServiceProvider.GetRequiredService<MainDbContext>();
+        var logger       = scope.ServiceProvider.GetRequiredService<ILogger<MainDbContext>>();
 
         try
         {
             await context.Database.MigrateAsync();
-            await SeedRegimenesFiscalesAsync(context);
-            await SeedUsosCfdiAsync(context);
+            //await SeedRegimenesFiscalesAsync(context);
         }
         catch (Exception ex)
         {
@@ -30,70 +30,35 @@ public static class ApplicationDbSeeder
 
     private static async Task SeedRegimenesFiscalesAsync(ApplicationDbContext context)
     {
-        if (await context.RegimenesFiscales.AnyAsync())
+        if (await context.TaxRegimes.AnyAsync())
             return;
 
-        var regimenes = new List<RegimenFiscal>
+        var regimenes = new List<TaxRegime>
         {
-            new() { ClaveSat = 601, Descripcion = "General de Ley Personas Morales",                                                                          Estatus = Estatus.Activo },
-            new() { ClaveSat = 603, Descripcion = "Personas Morales con Fines no Lucrativos",                                                                 Estatus = Estatus.Activo },
-            new() { ClaveSat = 605, Descripcion = "Sueldos y Salarios e Ingresos Asimilados a Salarios",                                                      Estatus = Estatus.Activo },
-            new() { ClaveSat = 606, Descripcion = "Arrendamiento",                                                                                            Estatus = Estatus.Activo },
-            new() { ClaveSat = 607, Descripcion = "Régimen de Enajenación o Adquisición de Bienes",                                                           Estatus = Estatus.Activo },
-            new() { ClaveSat = 608, Descripcion = "Demás ingresos",                                                                                           Estatus = Estatus.Activo },
-            new() { ClaveSat = 610, Descripcion = "Residentes en el Extranjero sin Establecimiento Permanente en México",                                     Estatus = Estatus.Activo },
-            new() { ClaveSat = 611, Descripcion = "Ingresos por Dividendos (socios y accionistas)",                                                           Estatus = Estatus.Activo },
-            new() { ClaveSat = 612, Descripcion = "Personas Físicas con Actividades Empresariales y Profesionales",                                           Estatus = Estatus.Activo },
-            new() { ClaveSat = 614, Descripcion = "Ingresos por intereses",                                                                                   Estatus = Estatus.Activo },
-            new() { ClaveSat = 615, Descripcion = "Régimen de los ingresos por obtención de premios",                                                         Estatus = Estatus.Activo },
-            new() { ClaveSat = 616, Descripcion = "Sin obligaciones fiscales",                                                                                 Estatus = Estatus.Activo },
-            new() { ClaveSat = 620, Descripcion = "Sociedades Cooperativas de Producción que optan por diferir sus ingresos",                                 Estatus = Estatus.Activo },
-            new() { ClaveSat = 621, Descripcion = "Incorporación Fiscal",                                                                                     Estatus = Estatus.Activo },
-            new() { ClaveSat = 622, Descripcion = "Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras",                                                 Estatus = Estatus.Activo },
-            new() { ClaveSat = 623, Descripcion = "Opcional para Grupos de Sociedades",                                                                       Estatus = Estatus.Activo },
-            new() { ClaveSat = 624, Descripcion = "Coordinados",                                                                                              Estatus = Estatus.Activo },
-            new() { ClaveSat = 625, Descripcion = "Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas",              Estatus = Estatus.Activo },
-            new() { ClaveSat = 626, Descripcion = "Régimen Simplificado de Confianza (RESICO)",                                                               Estatus = Estatus.Activo },
+            new() { SatCode = 601, Description = "General de Ley Personas Morales",                                                                          Status = Status.Active },
+            new() { SatCode = 603, Description = "Personas Morales con Fines no Lucrativos",                                                                 Status = Status.Active },
+            new() { SatCode = 605, Description = "Sueldos y Salarios e Ingresos Asimilados a Salarios",                                                      Status = Status.Active },
+            new() { SatCode = 606, Description = "Arrendamiento",                                                                                            Status = Status.Active },
+            new() { SatCode = 607, Description = "Régimen de Enajenación o Adquisición de Bienes",                                                           Status = Status.Active },
+            new() { SatCode = 608, Description = "Demás ingresos",                                                                                           Status = Status.Active },
+            new() { SatCode = 610, Description = "Residentes en el Extranjero sin Establecimiento Permanente en México",                                     Status = Status.Active },
+            new() { SatCode = 611, Description = "Ingresos por Dividendos (socios y accionistas)",                                                           Status = Status.Active },
+            new() { SatCode = 612, Description = "Personas Físicas con Actividades Empresariales y Profesionales",                                           Status = Status.Active },
+            new() { SatCode = 614, Description = "Ingresos por intereses",                                                                                   Status = Status.Active },
+            new() { SatCode = 615, Description = "Régimen de los ingresos por obtención de premios",                                                         Status = Status.Active },
+            new() { SatCode = 616, Description = "Sin obligaciones fiscales",                                                                                Status = Status.Active },
+            new() { SatCode = 620, Description = "Sociedades Cooperativas de Producción que optan por diferir sus ingresos",                                 Status = Status.Active },
+            new() { SatCode = 621, Description = "Incorporación Fiscal",                                                                                     Status = Status.Active },
+            new() { SatCode = 622, Description = "Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras",                                                 Status = Status.Active },
+            new() { SatCode = 623, Description = "Opcional para Grupos de Sociedades",                                                                       Status = Status.Active },
+            new() { SatCode = 624, Description = "Coordinados",                                                                                              Status = Status.Active },
+            new() { SatCode = 625, Description = "Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas",               Status = Status.Active },
+            new() { SatCode = 626, Description = "Régimen Simplificado de Confianza (RESICO)",                                                               Status = Status.Active },
         };
 
-        await context.RegimenesFiscales.AddRangeAsync(regimenes);
+        await context.TaxRegimes.AddRangeAsync(regimenes);
         await context.SaveChangesAsync();
     }
 
-    private static async Task SeedUsosCfdiAsync(ApplicationDbContext context)
-    {
-        if (await context.UsosCfdi.AnyAsync())
-            return;
-
-        var usos = new List<UsoCfdi>
-        {
-            new() { ClaveSat = "G01", Descripcion = "Adquisición de mercancias",                                                                              Estatus = Estatus.Activo },
-            new() { ClaveSat = "G02", Descripcion = "Devoluciones, descuentos o bonificaciones",                                                              Estatus = Estatus.Activo },
-            new() { ClaveSat = "G03", Descripcion = "Gastos en general",                                                                                      Estatus = Estatus.Activo },
-            new() { ClaveSat = "I01", Descripcion = "Construcciones",                                                                                         Estatus = Estatus.Activo },
-            new() { ClaveSat = "I02", Descripcion = "Mobilario y equipo de oficina por inversiones",                                                          Estatus = Estatus.Activo },
-            new() { ClaveSat = "I03", Descripcion = "Equipo de transporte",                                                                                   Estatus = Estatus.Activo },
-            new() { ClaveSat = "I04", Descripcion = "Equipo de computo y accesorios",                                                                         Estatus = Estatus.Activo },
-            new() { ClaveSat = "I05", Descripcion = "Dados, troqueles, moldes, matrices y herramental",                                                       Estatus = Estatus.Activo },
-            new() { ClaveSat = "I06", Descripcion = "Comunicaciones telefónicas",                                                                             Estatus = Estatus.Activo },
-            new() { ClaveSat = "I07", Descripcion = "Comunicaciones satelitales",                                                                             Estatus = Estatus.Activo },
-            new() { ClaveSat = "I08", Descripcion = "Otra maquinaria y equipo",                                                                               Estatus = Estatus.Activo },
-            new() { ClaveSat = "D01", Descripcion = "Honorarios médicos, dentales y gastos hospitalarios",                                                    Estatus = Estatus.Activo },
-            new() { ClaveSat = "D02", Descripcion = "Gastos médicos por incapacidad o discapacidad",                                                          Estatus = Estatus.Activo },
-            new() { ClaveSat = "D03", Descripcion = "Gastos funerales",                                                                                       Estatus = Estatus.Activo },
-            new() { ClaveSat = "D04", Descripcion = "Donativos",                                                                                              Estatus = Estatus.Activo },
-            new() { ClaveSat = "D05", Descripcion = "Intereses reales efectivamente pagados por créditos hipotecarios (casa habitación)",                     Estatus = Estatus.Activo },
-            new() { ClaveSat = "D06", Descripcion = "Aportaciones voluntarias al SAR",                                                                        Estatus = Estatus.Activo },
-            new() { ClaveSat = "D07", Descripcion = "Primas por seguros de gastos médicos",                                                                   Estatus = Estatus.Activo },
-            new() { ClaveSat = "D08", Descripcion = "Gastos de transportación escolar obligatoria",                                                           Estatus = Estatus.Activo },
-            new() { ClaveSat = "D09", Descripcion = "Depósitos en cuentas para el ahorro, primas que tengan como base planes de pensiones",                   Estatus = Estatus.Activo },
-            new() { ClaveSat = "D10", Descripcion = "Pagos por servicios educativos (colegiaturas)",                                                          Estatus = Estatus.Activo },
-            new() { ClaveSat = "S01", Descripcion = "Sin efectos fiscales",                                                                                   Estatus = Estatus.Activo },
-            new() { ClaveSat = "CP01", Descripcion = "Pagos",                                                                                                 Estatus = Estatus.Activo },
-            new() { ClaveSat = "CN01", Descripcion = "Nómina",                                                                                                Estatus = Estatus.Activo },
-        };
-
-        await context.UsosCfdi.AddRangeAsync(usos);
-        await context.SaveChangesAsync();
-    }
+    
 }

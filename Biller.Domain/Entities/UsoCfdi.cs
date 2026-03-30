@@ -1,4 +1,5 @@
-﻿using Biller.Domain.Enums;
+﻿using Biller.Domain.Entities.TenantsContext;
+using Biller.Domain.Enums;
 
 namespace Biller.Domain.Entities;
 
@@ -7,9 +8,9 @@ public class UsoCfdi
     public int Id { get; set; }
     public string ClaveSat { get; set; }
     public string Descripcion { get; set; }
-    public Estatus Estatus { get; set; }
+    public Status Estatus { get; set; }
 
 
     //Relationships
-    public IList<Receptor> Receptores { get; set; }
+    public IList<Client> Receptores { get; set; }
 }

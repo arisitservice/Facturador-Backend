@@ -13,7 +13,7 @@ public class CfdiConcepto
     public decimal  ValorUnitario   { get; private set; }
     public decimal  Importe         { get; private set; }
     public decimal  TrasladoIva     { get; private set; }
-    public Estatus  Estatus         { get; private set; }
+    public Status  Estatus         { get; private set; }
     public int      CreatedBy       { get; private set; }
     public DateTime CreatedAt       { get; private set; }
 

@@ -1,6 +1,7 @@
 using Biller.Application.Infrastructure.Interface.Persistence;
 using Biller.Application.Models.Receptores;
 using Biller.Application.UseCase.Contracts;
+using Biller.Domain.Entities.TenantsContext;
 
 namespace Biller.Application.UseCase.Implementations;
 
@@ -15,15 +16,14 @@ public class ReceptoresUseCase : IReceptoresUseCase
 
     public async Task<ReceptorResponse> CrearAsync(ReceptorRequest request)
     {
-        var receptor = new Biller.Domain.Entities.Receptor
+        var receptor = new Client
         {
-            Nombre          = request.Name,
-            Rfc             = request.TaxId,
-            CodigoPostal    = request.PostalCode,
-            RazonSocial     = request.BusinessName,
-            DomicilioFiscal = request.TaxAddress,
-            IdRegimenFiscal = request.TaxRegimeId,  
-            IdUsoCfdi       = request.CfdiUseId
+            Name          = request.Name,
+            TaxId             = request.TaxId,
+            PostalCode    = request.PostalCode,
+            BusinessName     = request.BusinessName,
+            TaxAddress = request.TaxAddress,
+            TaxRegimeId = request.TaxRegimeId
         };
 
         await _unitOfWork.Receptores.AddAsync(receptor);
@@ -49,13 +49,12 @@ public class ReceptoresUseCase : IReceptoresUseCase
         var receptor = await _unitOfWork.Receptores.GetByIdAsync(id)
             ?? throw new KeyNotFoundException($"Receptor con Id {id} no encontrado.");
 
-        receptor.Nombre          = request.Name;
-        receptor.Rfc             = request.TaxId;
-        receptor.CodigoPostal    = request.PostalCode;
-        receptor.RazonSocial     = request.BusinessName;
-        receptor.DomicilioFiscal = request.TaxAddress;
-        receptor.IdRegimenFiscal = request.TaxRegimeId;
-        receptor.IdUsoCfdi       = request.CfdiUseId;
+        receptor.Name          = request.Name;
+        receptor.TaxId = request.TaxId;
+        receptor.PostalCode    = request.PostalCode;
+        receptor.BusinessName = request.BusinessName;
+        receptor.TaxAddress = request.TaxAddress;
+        receptor.TaxRegimeId = request.TaxRegimeId;
 
         await _unitOfWork.Receptores.UpdateAsync(receptor);
         await _unitOfWork.SaveChangesAsync();
@@ -72,15 +71,14 @@ public class ReceptoresUseCase : IReceptoresUseCase
         await _unitOfWork.SaveChangesAsync();
     }
 
-    private static ReceptorResponse ToResponse(Biller.Domain.Entities.Receptor r) => new()
+    private static ReceptorResponse ToResponse(Client r) => new()
     {
         Id              = r.Id,
-        DomicilioFiscal = r.DomicilioFiscal,
-        CodigoPostal    = r.CodigoPostal,
-        Nombre          = r.Nombre,
-        RazonSocial     = r.RazonSocial,
-        Rfc             = r.Rfc,
-        IdRegimenFiscal = r.IdRegimenFiscal,
-        IdUsoCfdi       = r.IdUsoCfdi
+        DomicilioFiscal = r.TaxAddress,
+        CodigoPostal    = r.PostalCode,
+        Nombre          = r.Name,
+        RazonSocial     = r.BusinessName,
+        Rfc             = r.TaxId,
+        IdRegimenFiscal = r.TaxRegimeId
     };
 }

@@ -1,12 +1,15 @@
 using Biller.Application.UseCase;
 using Biller.Infrastructure;
 using Biller.Infrastructure.Persistence.Seeders;
+using Biller.Presentation.Api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor();
+
 
 builder.Services.RegisterInfrastructureServicesServices(builder.Configuration);
 builder.Services.AddUseCases();
@@ -25,6 +28,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseWhen(
+    ctx => ctx.Request.Path.StartsWithSegments("/api/v1"),
+    branch => branch.UseMiddleware<TenantMiddleware>()
+);
 
 app.UseAuthorization();
 

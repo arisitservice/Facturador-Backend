@@ -19,7 +19,7 @@ public class CfdiComplementoPago
     public decimal ImporteSaldoAnterior { get; set; }
     public decimal ImportePagado { get; set; }
     public decimal ImportePagadoInsoluto { get; set; }
-    public Estatus Estatus { get; set; }
+    public Status Estatus { get; set; }
     public int CreatedBy { get; set; }
     public DateTime CreatedAt { get; set; }
    
