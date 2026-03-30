@@ -4,7 +4,7 @@
     {
       "label": "Iniciar API",
       "type": "shell",
-      "command": "dotnet watch --project Biller.Presentation.Api/Biller.Presentation.Api.csproj",
+      "command": "ASPNETCORE_ENVIRONMENT=Development dotnet watch --project Biller.Presentation.Api/Biller.Presentation.Api.csproj",
       "isBackground": true,
       "problemMatcher": {
         "pattern": {
