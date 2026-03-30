@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -14,11 +15,11 @@ namespace Biller.Infrastructure.Persistence.Migrations.ApplicationDb
                 name: "TaxRegimes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SatCode = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    SatCode = table.Column<int>(type: "integer", nullable: false),
+                    Description = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,15 +30,15 @@ namespace Biller.Infrastructure.Persistence.Migrations.ApplicationDb
                 name: "Clients",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TaxAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostalCode = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    BusinessName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    TaxId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    CanEmitBill = table.Column<bool>(type: "bit", nullable: false),
-                    TaxRegimeId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TaxAddress = table.Column<string>(type: "text", nullable: false),
+                    PostalCode = table.Column<string>(type: "character varying(5)", maxLength: 5, nullable: false),
+                    Name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    BusinessName = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
+                    TaxId = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    CanEmitBill = table.Column<bool>(type: "boolean", nullable: false),
+                    TaxRegimeId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

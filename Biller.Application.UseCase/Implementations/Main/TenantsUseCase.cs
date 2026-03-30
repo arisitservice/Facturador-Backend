@@ -4,6 +4,7 @@ using Biller.Application.Models.Main;
 using Biller.Application.UseCase.Contracts.Main;
 using Biller.Domain.Entities.MainDb;
 using Biller.Domain.Enums;
+using Microsoft.Extensions.Configuration;
 using Slugify;
 using System.Security.Cryptography;
 using System.Text;
@@ -15,18 +16,24 @@ public class TenantsUseCase : ITenantsUseCase
 {
     private readonly IMainUnitOfWork _unitOfWork;
     private readonly ITenantDbService tenantDbService;
-
-    public TenantsUseCase(IMainUnitOfWork unitOfWork, ITenantDbService tenantDbService)
+    private readonly IConfiguration configuration;
+    public TenantsUseCase(IMainUnitOfWork unitOfWork, ITenantDbService tenantDbService, IConfiguration configuration)
     {
         _unitOfWork = unitOfWork;
         this.tenantDbService = tenantDbService;
+        this.configuration = configuration;
     }
 
     public async Task<CreateTenantResponse> CrearAsync(CreateTenantRequest request)
     {
         var slugHelper = new SlugHelper();
         string subdomain = slugHelper.GenerateSlug(request.Tenant.Company);
-        var connectionString = $"Server=.;Database=Tenant_{subdomain};user=sa;password=YourStrongPassw0rd;TrustServerCertificate=true;";
+        var connectionString = configuration["TenantConnectionStringTemplate"];
+
+        if (string.IsNullOrEmpty(connectionString))
+            throw new ArgumentNullException("TenantConnectionStringTemplate must be configured");
+
+        connectionString = connectionString.Replace("{dbname}", "Tenant_" + subdomain);
 
         await tenantDbService.Create(connectionString);
 

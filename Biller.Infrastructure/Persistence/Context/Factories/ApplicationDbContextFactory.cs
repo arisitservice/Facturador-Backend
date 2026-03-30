@@ -9,7 +9,7 @@ public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<Applicati
     public ApplicationDbContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-        optionsBuilder.UseSqlServer("server=localhost,1433;database=Biller;user=sa;password=YourStrongPassw0rd;TrustServerCertificate=true;");
+        optionsBuilder.UseNpgsql("Host=172.17.0.1;Port=5432;Database=Biller;Username=postgres;Password=YourStrongPassw0rd;SSL Mode=Disable");
 
         return new ApplicationDbContext(optionsBuilder.Options);
     }

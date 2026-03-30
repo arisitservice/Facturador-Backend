@@ -12,7 +12,7 @@ public class TenantDbService : ITenantDbService
     public async Task Create(string connectionString)
     {
         var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-        .UseSqlServer(connectionString)
+        .UseNpgsql(connectionString)
         .Options;
 
         using var dbContext = new ApplicationDbContext(options);
