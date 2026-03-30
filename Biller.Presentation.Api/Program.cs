@@ -1,6 +1,7 @@
 using Biller.Application.UseCase;
 using Biller.Infrastructure;
 using Biller.Infrastructure.Persistence.Seeders;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,7 @@ await ApplicationDbSeeder.SeedAsync(app.Services);
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();
