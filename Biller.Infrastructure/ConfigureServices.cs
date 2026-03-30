@@ -27,7 +27,7 @@ public static class ConfigureServices
     {
         services.AddDbContext<MainDbContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("Biller"),
+            options.UseNpgsql(configuration.GetConnectionString("Biller"),
             builder =>
             {
                 builder.MigrationsAssembly(typeof(MainDbContext).Assembly.FullName);

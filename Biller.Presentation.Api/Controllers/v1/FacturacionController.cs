@@ -29,7 +29,7 @@ public class FacturacionController : ControllerBase
         return Ok(new
         {
             status = 200,
-            data = new { message = "Hola mundo dsesde .NET !!!!" }
+            data = new { message = "Hola mundo dsesde .NET  con scalar yey !!!!" }
         });
     }
 }
