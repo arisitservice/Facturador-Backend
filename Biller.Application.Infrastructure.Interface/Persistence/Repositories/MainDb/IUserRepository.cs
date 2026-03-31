@@ -1,4 +1,4 @@
-using Biller.Domain.Entities.MainDb;
+using Biller.Domain.Entities.Main;
 
 namespace Biller.Application.Infrastructure.Interface.Persistence.Repositories.MainDb;
 

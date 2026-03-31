@@ -1,5 +1,5 @@
-using Biller.Application.Models.Tenants.Clients;
-using Biller.Application.UseCase.Tenants.Clients.Commands.CreateClientCommand;
+using Biller.Application.Models.Tenant.Clients;
+using Biller.Application.UseCase.Tenant.Clients.Commands.CreateClientCommand;
 using Biller.Presentation.Api.Models.Response;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

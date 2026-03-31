@@ -1,4 +1,4 @@
-using Biller.Domain.Entities.MainDb;
+using Biller.Domain.Entities.Main;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

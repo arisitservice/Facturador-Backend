@@ -1,5 +1,5 @@
 using Biller.Application.Infrastructure.Interface.Persistence.Repositories.MainDb;
-using Biller.Domain.Entities.MainDb;
+using Biller.Domain.Entities.Main;
 using Biller.Infrastructure.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 

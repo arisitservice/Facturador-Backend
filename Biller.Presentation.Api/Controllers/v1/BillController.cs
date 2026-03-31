@@ -1,5 +1,5 @@
 
-using Biller.Application.UseCase.Tenants.Bills.Commands.CreateBillCommand;
+using Biller.Application.UseCase.Tenant.Bills.Commands.CreateBillCommand;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

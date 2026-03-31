@@ -1,4 +1,4 @@
-using Biller.Domain.Entities.TenantsContext;
+using Biller.Domain.Entities.Tenant;
 using Biller.Domain.Enums;
 using Biller.Infrastructure.Persistence.Context;
 using Biller.Infrastructure.Persistence.Contexts;
@@ -28,7 +28,7 @@ public static class ApplicationDbSeeder
         }
     }
 
-    private static async Task SeedRegimenesFiscalesAsync(ApplicationDbContext context)
+    private static async Task SeedRegimenesFiscalesAsync(TenantDbContext context)
     {
         if (await context.TaxRegimes.AnyAsync())
             return;

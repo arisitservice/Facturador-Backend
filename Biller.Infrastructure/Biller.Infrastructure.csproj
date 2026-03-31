@@ -23,6 +23,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Biller.Application.Infrastructure.Interface\Biller.Application.Infrastructure.Interface.csproj" />
     <ProjectReference Include="..\Biller.Application.UseCase\Biller.Application.UseCase.csproj" />
+    <ProjectReference Include="..\Biller.Shared\Biller.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Persistence\Migrations\" />
   </ItemGroup>
 
 </Project>

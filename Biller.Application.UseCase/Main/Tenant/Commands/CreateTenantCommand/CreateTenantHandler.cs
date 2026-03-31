@@ -2,7 +2,7 @@
 using Biller.Application.Infrastructure.Interface.Persistence;
 using Biller.Application.Infrastructure.Interface.Persistence.Services;
 using Biller.Application.Models.Main.Tenant;
-using Biller.Domain.Entities.MainDb;
+using Biller.Domain.Entities.Main;
 using Biller.Domain.Enums;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -38,7 +38,7 @@ public class CreateTenantHandler : IRequestHandler<CreateTenantCommand, TenantCr
 
         await tenantDbService.Create(connectionString);
 
-        var tenant = new Domain.Entities.MainDb.Tenant
+        var tenant = new Domain.Entities.Main.Tenant
         {
             Id = Guid.NewGuid(),
             Name = request.Tenant.Name,

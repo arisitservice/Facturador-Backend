@@ -1,6 +1,6 @@
-using Biller.Application.Models.Tenants.TaxRegimes;
-using Biller.Application.UseCase.Tenants.TaxRegimes.Queries.GetAllTaxRegimesQuery;
-using Biller.Application.UseCase.Tenants.TaxRegimes.Queries.GetTaxRegimeByIdQuery;
+using Biller.Application.Models.Tenant.TaxRegimes;
+using Biller.Application.UseCase.Tenant.TaxRegimes.Queries.GetAllTaxRegimesQuery;
+using Biller.Application.UseCase.Tenant.TaxRegimes.Queries.GetTaxRegimeByIdQuery;
 using Biller.Presentation.Api.Models.Response;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

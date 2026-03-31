@@ -1,5 +1,5 @@
 ﻿using Biller.Application.Infrastructure.Interface.Persistence.Services;
-using Biller.Domain.Entities.TenantsContext;
+using Biller.Domain.Entities.Tenant;
 using Biller.Domain.Enums;
 using Biller.Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -11,11 +11,11 @@ public class TenantDbService : ITenantDbService
   
     public async Task Create(string connectionString)
     {
-        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+        var options = new DbContextOptionsBuilder<TenantDbContext>()
         .UseNpgsql(connectionString)
         .Options;
 
-        using var dbContext = new ApplicationDbContext(options);
+        using var dbContext = new TenantDbContext(options);
         await dbContext.Database.MigrateAsync();
 
         var regimenes = GetDefaultRegimes();

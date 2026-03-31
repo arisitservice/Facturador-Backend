@@ -13,4 +13,7 @@
   <Folder Name="/4. Domain/">
     <Project Path="Biller.Domain/Biller.Domain.csproj" />
   </Folder>
+  <Folder Name="/5. Shared/">
+    <Project Path="Biller.Shared/Biller.Shared.csproj" Id="1be23a74-85cb-4461-9aa8-ed137e13efd3" />
+  </Folder>
 </Solution>

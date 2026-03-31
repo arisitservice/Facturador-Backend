@@ -1,4 +1,4 @@
-﻿using Biller.Domain.Entities.TenantsContext;
+﻿using Biller.Domain.Entities.Tenant;
 using Biller.Domain.Enums;
 
 namespace Biller.Domain.Entities;

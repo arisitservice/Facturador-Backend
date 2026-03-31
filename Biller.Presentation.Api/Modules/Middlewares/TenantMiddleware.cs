@@ -1,5 +1,6 @@
 ﻿using Biller.Infrastructure.Persistence.Context;
 using Biller.Infrastructure.Persistence.Services;
+using Biller.Shared;
 using Microsoft.EntityFrameworkCore;
 
 namespace Biller.Presentation.Api.Modules.Middlewares
@@ -7,9 +8,9 @@ namespace Biller.Presentation.Api.Modules.Middlewares
     public class TenantMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly IApplicationDbContextGenerator _factory;
+        private readonly ITenantDbContextGenerator _factory;
 
-        public TenantMiddleware(RequestDelegate next, IApplicationDbContextGenerator factory)
+        public TenantMiddleware(RequestDelegate next, ITenantDbContextGenerator factory)
         {
             _next = next;
             _factory = factory;
@@ -35,8 +36,8 @@ namespace Biller.Presentation.Api.Modules.Middlewares
             }
 
             var dbContext = _factory.CreateDbContext(tenant.ConnectionString);
-            context.Items["ApplicationDbContext"] = dbContext;
-            context.Items["Tenant"] = tenant;
+            context.Items[Constants.HttpContextTenantDbContextKey] = dbContext;
+            context.Items[Constants.HttpContextTenantEntityKey] = tenant;
 
             await _next(context);
         }

@@ -16,7 +16,7 @@ public class MainDbContextFactory : IDesignTimeDbContextFactory<MainDbContext>
         //var connectionString = configuration.GetConnectionString("MainDb");
 
         var optionsBuilder = new DbContextOptionsBuilder<MainDbContext>();
-        optionsBuilder.UseNpgsql("Host=172.17.0.1;Port=5432;Database=Biller;Username=postgres;Password=YourStrongPassw0rd;SSL Mode=Disable");
+        optionsBuilder.UseNpgsql("");
 
         return new MainDbContext(optionsBuilder.Options);
     }
