@@ -3,6 +3,7 @@ using Biller.Infrastructure;
 using Biller.Infrastructure.Persistence.Seeders;
 using Biller.Presentation.Api.Modules.GlobalException;
 using Biller.Presentation.Api.Modules.Middlewares;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,7 @@ await ApplicationDbSeeder.SeedAsync(app.Services);
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapScalarApiReference();
 }
 
 app.UseHttpsRedirection();

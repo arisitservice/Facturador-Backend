@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Biller.Presentation.Api.Controllers.v1;
 
 [ApiController]
-[Route("api/v1/[controller]")]
+[Route("/api/v1/[controller]")]
 public class BillController : ControllerBase
 {
     private readonly IMediator mediator;
