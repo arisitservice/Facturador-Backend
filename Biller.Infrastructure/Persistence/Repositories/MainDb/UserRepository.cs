@@ -25,13 +25,6 @@ public class UserRepository : IUserRepository
             .FirstOrDefaultAsync(u => u.Email == email);
     }
 
-    public async Task<IEnumerable<User>> GetAllByTenantAsync(Guid tenantId)
-    {
-        return await _context.Users
-            .Where(u => u.TenantId == tenantId)
-            .ToListAsync();
-    }
-
     public async Task AddAsync(User user)
     {
         await _context.Users.AddAsync(user);

@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Biller.Shared\Biller.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Enums\Main\" />
+  </ItemGroup>
+
 </Project>

@@ -3,7 +3,7 @@ using Biller.Application.Infrastructure.Interface.Persistence;
 using Biller.Application.Infrastructure.Interface.Persistence.Services;
 using Biller.Application.Models.Main.Tenant;
 using Biller.Domain.Entities.Main;
-using Biller.Domain.Enums;
+using Biller.Domain.Enums.Tenant;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Slugify;
@@ -28,15 +28,27 @@ public class CreateTenantHandler : IRequestHandler<CreateTenantCommand, TenantCr
     public async Task<TenantCreatedDTO> Handle(CreateTenantCommand request, CancellationToken cancellationToken)
     {
         var slugHelper = new SlugHelper();
-        string subdomain = slugHelper.GenerateSlug(request.Tenant.Company);
+        string subdomain = slugHelper.GenerateSlug(request.Tenant.Company).Replace(".", "");
         var connectionString = configuration["TenantConnectionStringTemplate"];
 
         if (string.IsNullOrEmpty(connectionString))
             throw new ArgumentNullException("TenantConnectionStringTemplate must be configured");
 
-        connectionString = connectionString.Replace("{dbname}", "Tenant_" + subdomain);
+        connectionString = connectionString.Replace("{dbname}", "tenant-" + subdomain);
 
-        await tenantDbService.Create(connectionString);
+
+        var owner = new Biller.Domain.Entities.Tenant.TenantUser
+        {
+            Username = request.Owner.Username,
+            Email = request.Owner.Email,
+            PasswordHash = HashPassword(request.Owner.Password),
+            UserType = TenantUserType.Owner,
+            Created = DateTime.UtcNow,
+            CreatedBy = request.Owner.Username
+        };
+
+        await tenantDbService.Create(connectionString, owner);
+
 
         var tenant = new Domain.Entities.Main.Tenant
         {
@@ -49,19 +61,6 @@ public class CreateTenantHandler : IRequestHandler<CreateTenantCommand, TenantCr
         };
 
         await _unitOfWork.Tenants.AddAsync(tenant);
-
-        var owner = new User
-        {
-            Username = request.Owner.Username,
-            Email = request.Owner.Email,
-            PasswordHash = HashPassword(request.Owner.Password),
-            UserType = UserType.Owner,
-            TenantId = tenant.Id,
-            Created = DateTime.UtcNow,
-            CreatedBy = request.Owner.Username
-        };
-
-        await _unitOfWork.Users.AddAsync(owner);
         await _unitOfWork.SaveChangesAsync();
 
         return new TenantCreatedDTO

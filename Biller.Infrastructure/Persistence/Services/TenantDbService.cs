@@ -9,18 +9,21 @@ namespace Biller.Infrastructure.Persistence.Services;
 public class TenantDbService : ITenantDbService
 {
   
-    public async Task Create(string connectionString)
+    public async Task Create(string connectionString, TenantUser owner)
     {
         var options = new DbContextOptionsBuilder<TenantDbContext>()
         .UseNpgsql(connectionString)
         .Options;
 
         using var dbContext = new TenantDbContext(options);
+
         await dbContext.Database.MigrateAsync();
 
         var regimenes = GetDefaultRegimes();
 
         await dbContext.TaxRegimes.AddRangeAsync(regimenes);
+        await dbContext.TenantUsers.AddAsync(owner);
+
         await dbContext.SaveChangesAsync();
     }
 

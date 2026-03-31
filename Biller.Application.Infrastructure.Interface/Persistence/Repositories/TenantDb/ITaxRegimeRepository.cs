@@ -1,4 +1,4 @@
-susing Biller.Domain.Entities.TenantsContext;
+using Biller.Domain.Entities.Tenant;
 
 namespace Biller.Application.Infrastructure.Interface.Persistence.Repositories.TenantDb;
 
