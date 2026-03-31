@@ -1,6 +1,7 @@
-using Biller.Application.Models.Main;
-using Biller.Application.UseCase.Contracts.Main;
+using Biller.Application.Models.Main.Tenant;
+using Biller.Application.UseCase.Main.Tenant.Commands.CreateTenantCommand;
 using Biller.Presentation.Api.Models.Response;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Biller.Presentation.Api.Controllers.Main;
@@ -9,34 +10,21 @@ namespace Biller.Presentation.Api.Controllers.Main;
 [Route("api/main/[controller]")]
 public class TenantsController : MainController
 {
-    private readonly ITenantsUseCase _tenantsUseCase;
+    private readonly IMediator mediator;
 
-    public TenantsController(ITenantsUseCase tenantsUseCase)
+    public TenantsController(IMediator mediator)
     {
-        _tenantsUseCase = tenantsUseCase;
+        this.mediator = mediator;
     }
 
     [HttpPost("Create")]
-    [ProducesResponseType<Response<CreateTenantResponse>>(StatusCodes.Status200OK)]
-    [ProducesResponseType<Response<CreateTenantResponse>>(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Create([FromBody] CreateTenantRequest request)
+    [ProducesResponseType<Response<TenantCreatedDTO>>(StatusCodes.Status200OK)]
+    [ProducesResponseType<Response<TenantCreatedDTO>>(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> Create([FromBody] CreateTenantCommand request)
     {
-        var response = new Response<CreateTenantResponse>();
+        var response = new Response<TenantCreatedDTO>();
 
-        var validator = new CreateTenantRequestValidator();
-        var validationResult = await validator.ValidateAsync(request);
-
-        if (!validationResult.IsValid)
-        {
-            var errors = validationResult.Errors
-                .Select(e => new BaseError { Property = e.PropertyName, ErrorMessage = e.ErrorMessage })
-                .ToList();
-
-            response.SetValidationErrorResponse(errors);
-            return GetActionResult(response);
-        }
-
-        var result = await _tenantsUseCase.CrearAsync(request);
+        var result = await mediator.Send(request);
         response.SetSuccessResponse(result);
 
         return GetActionResult(response);

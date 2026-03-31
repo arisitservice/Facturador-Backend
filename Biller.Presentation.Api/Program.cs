@@ -1,7 +1,8 @@
 using Biller.Application.UseCase;
 using Biller.Infrastructure;
 using Biller.Infrastructure.Persistence.Seeders;
-using Biller.Presentation.Api.Middlewares;
+using Biller.Presentation.Api.Modules.GlobalException;
+using Biller.Presentation.Api.Modules.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,8 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.RegisterInfrastructureServicesServices(builder.Configuration);
 builder.Services.AddUseCases();
+
+builder.Services.AddGlobalExceptionHandler();
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -37,5 +40,7 @@ app.UseWhen(
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseGlobalExceptionMiddleware();
 
 app.Run();

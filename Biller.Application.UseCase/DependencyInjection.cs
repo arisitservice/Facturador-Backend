@@ -1,8 +1,8 @@
-using Biller.Application.UseCase.Contracts;
-using Biller.Application.UseCase.Contracts.Main;
-using Biller.Application.UseCase.Implementations;
-using Biller.Application.UseCase.Implementations.Main;
+using Biller.Application.UseCase.Behaviours;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Biller.Application.UseCase;
 
@@ -10,11 +10,14 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddUseCases(this IServiceCollection services)
     {
-        services.AddScoped<ICrearComprobanteUseCase, CrearComprobanteUseCase>();
-        services.AddScoped<IReceptoresUseCase, ReceptoresUseCase>();
-        services.AddScoped<ITenantsUseCase, TenantsUseCase>();
-        services.AddScoped<ITaxRegimesUseCase, TaxRegimesUseCase>();
 
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+        services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+        });
         return services;
     }
 }
