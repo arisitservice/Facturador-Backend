@@ -107,6 +107,24 @@ Respuesta esperada: `HTTP/1.1 400 Bad Request` (validación corriendo = API oper
 
 ---
 
+## Levantar en QA
+
+Para que la API use `appsettings.QA.json` en vez de `appsettings.json`, agregá la variable `ASPNETCORE_ENVIRONMENT=QA` al `docker run`:
+
+```bash
+docker run -d \
+  --name facturador-api \
+  -p 8080:8080 \
+  -e ASPNETCORE_ENVIRONMENT=QA \
+  --env-file /var/www/back/Facturador-Backend/.env \
+  --network facturador-net \
+  facturador-api
+```
+
+> El `.env` sigue siendo necesario si tiene variables adicionales. La connection string de QA viene de `appsettings.QA.json` y apunta a `Host=postgres` (contenedor en la misma red).
+
+---
+
 ## Actualizar el deploy (nuevas versiones)
 
 ```bash
