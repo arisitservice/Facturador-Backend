@@ -1,4 +1,5 @@
 using Biller.Application.UseCase.Behaviours;
+using Biller.Application.UseCase.Servicea.Encrypt;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,9 @@ public static class DependencyInjection
             config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
             config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         });
+
+        services.AddScoped<IPasswordEncriptionService, PasswordEncryptService>();
+
         return services;
     }
 }

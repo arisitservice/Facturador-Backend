@@ -2,6 +2,7 @@
 using Biller.Application.Infrastructure.Interface.Persistence;
 using Biller.Application.Infrastructure.Interface.Persistence.Services;
 using Biller.Application.Models.Main.Tenant;
+using Biller.Application.UseCase.Servicea.Encrypt;
 using Biller.Domain.Entities.Main;
 using Biller.Domain.Enums.Tenant;
 using MediatR;
@@ -17,12 +18,14 @@ public class CreateTenantHandler : IRequestHandler<CreateTenantCommand, TenantCr
     private readonly IMainUnitOfWork _unitOfWork;
     private readonly ITenantDbService tenantDbService;
     private readonly IConfiguration configuration;
+    private readonly IPasswordEncriptionService passwordEncriptionService;
 
-    public CreateTenantHandler(IMainUnitOfWork unitOfWork, ITenantDbService tenantDbService, IConfiguration configuration)
+    public CreateTenantHandler(IMainUnitOfWork unitOfWork, ITenantDbService tenantDbService, IConfiguration configuration, IPasswordEncriptionService passwordEncriptionService)
     {
         _unitOfWork = unitOfWork;
         this.tenantDbService = tenantDbService;
         this.configuration = configuration;
+        this.passwordEncriptionService = passwordEncriptionService;
     }
 
     public async Task<TenantCreatedDTO> Handle(CreateTenantCommand request, CancellationToken cancellationToken)
@@ -41,8 +44,9 @@ public class CreateTenantHandler : IRequestHandler<CreateTenantCommand, TenantCr
         {
             Username = request.Owner.Username,
             Email = request.Owner.Email,
-            PasswordHash = HashPassword(request.Owner.Password),
+            PasswordHash = passwordEncriptionService.Encrypt(request.Owner.Password),
             UserType = TenantUserType.Owner,
+            Status = Domain.Enums.Status.Active,
             Created = DateTime.UtcNow,
             CreatedBy = request.Owner.Username
         };
@@ -77,11 +81,5 @@ public class CreateTenantHandler : IRequestHandler<CreateTenantCommand, TenantCr
                 Email = owner.Email
             }
         };
-    }
-
-    private string HashPassword(string password)
-    {
-        var bytes = SHA256.HashData(Encoding.UTF8.GetBytes(password));
-        return Convert.ToBase64String(bytes);
     }
 }

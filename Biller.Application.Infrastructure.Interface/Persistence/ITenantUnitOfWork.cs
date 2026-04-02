@@ -6,5 +6,6 @@ public interface ITenantUnitOfWork
 {
     IClientRepository Receptores { get; }
     ITaxRegimeRepository TaxRegimes { get; }
+    ITenantUserRepository TenantUsers { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

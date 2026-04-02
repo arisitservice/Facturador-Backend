@@ -1,12 +1,13 @@
-
 using Biller.Application.UseCase.Tenant.Bills.Commands.CreateBillCommand;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Biller.Presentation.Api.Controllers.v1;
+namespace Biller.Presentation.Api.Controllers.Tenant.v1;
 
 [ApiController]
-[Route("/api/v1/[controller]")]
+[Authorize]
+[Route("api/Tenant/v1/[controller]")]
 public class BillController : ControllerBase
 {
     private readonly IMediator mediator;

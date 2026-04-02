@@ -12,12 +12,14 @@ public class TenantUnitOfWork : ITenantUnitOfWork
 
     public IClientRepository Receptores { get; }
     public ITaxRegimeRepository TaxRegimes { get; }
+    public ITenantUserRepository TenantUsers { get; }
 
-    public TenantUnitOfWork(IHttpContextAccessor context, IClientRepository receptorRepository, ITaxRegimeRepository taxRegimeRepository)
+    public TenantUnitOfWork(IHttpContextAccessor context, IClientRepository receptorRepository, ITaxRegimeRepository taxRegimeRepository, ITenantUserRepository tenantUserRepository)
     {
         dbContext = context.HttpContext.Items[Constants.HttpContextTenantDbContextKey] as TenantDbContext;
         Receptores = receptorRepository;
         TaxRegimes = taxRegimeRepository;
+        TenantUsers = tenantUserRepository;
     }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

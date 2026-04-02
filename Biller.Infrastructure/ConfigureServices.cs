@@ -1,6 +1,7 @@
 ﻿
 using Biller.Application.Infrastructure.Interface.Persistence;
 using Biller.Application.Infrastructure.Interface.Persistence.Repositories.MainDb;
+using Biller.Application.Infrastructure.Interface.Persistence.Repositories.TenantDb;
 using Biller.Application.Infrastructure.Interface.Persistence.Services;
 using Biller.Infrastructure.Persistence.Context;
 using Biller.Infrastructure.Persistence.Repositories.TenantDb;
@@ -11,7 +12,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Biller.Application.Infrastructure.Interface.Persistence.Repositories.TenantDb;
 
 namespace Biller.Infrastructure;
 
@@ -42,6 +42,7 @@ public static class ConfigureServices
         /*Tenant db context*/
         services.AddScoped<IClientRepository, ClientRepository>();
         services.AddScoped<ITaxRegimeRepository, TaxRegimeRepository>();
+        services.AddScoped<ITenantUserRepository, TenantUserRepository>();
         services.AddScoped<ITenantUnitOfWork, TenantUnitOfWork>();
 
 

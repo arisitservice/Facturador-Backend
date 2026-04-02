@@ -3,13 +3,15 @@ using Biller.Application.UseCase.Tenant.TaxRegimes.Queries.GetAllTaxRegimesQuery
 using Biller.Application.UseCase.Tenant.TaxRegimes.Queries.GetTaxRegimeByIdQuery;
 using Biller.Presentation.Api.Models.Response;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace Biller.Presentation.Api.Controllers.v1;
+namespace Biller.Presentation.Api.Controllers.Tenant.v1;
 
 [ApiController]
-[Route("api/v1/[controller]")]
+[Authorize]
+[Route("api/Tenant/v1/[controller]")]
 public class TaxRegimesController : MainController
 {
     private readonly ISender _sender;
@@ -19,7 +21,7 @@ public class TaxRegimesController : MainController
         _sender = sender;
     }
 
-    [HttpGet]
+    [HttpGet("GetAll")]
     [ProducesResponseType<Response<IEnumerable<TaxRegimeDTO>>>(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll()
     {
