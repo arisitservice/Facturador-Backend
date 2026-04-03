@@ -18,6 +18,19 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 });
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins(
+                "http://localhost:3000",
+                "http://3.143.253.236:3000"
+            )
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 
 builder.Services.RegisterInfrastructureServicesServices(builder.Configuration);
 builder.Services.AddUseCases();
@@ -54,6 +67,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseWhen(
     ctx => ctx.Request.Path.StartsWithSegments("/api/Tenant/v1"),
