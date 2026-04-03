@@ -3,6 +3,7 @@ using Biller.Application.Models.Tenant.Clients;
 using Biller.Domain.Entities.Tenant;
 using Biller.Infrastructure.Persistence.Contexts;
 using Biller.Shared;
+using Biller.Shared.ExtensionMethods;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,7 +20,7 @@ public class ClientRepository : IClientRepository
 
     public async Task<IEnumerable<ClientDTO>> GetAllAsync()
     {
-        return await dbContext.Clients.AsNoTracking().Select(x => new ClientDTO() { Id = x.Id, Name = x.Name }).ToListAsync();
+        return await dbContext.Clients.AsNoTracking().Select(x => x.CastTo<ClientDTO>()).ToListAsync();
     }
 
 
