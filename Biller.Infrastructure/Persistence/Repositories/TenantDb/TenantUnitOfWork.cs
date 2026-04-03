@@ -10,14 +10,14 @@ public class TenantUnitOfWork : ITenantUnitOfWork
 {
     private readonly TenantDbContext dbContext;
 
-    public IClientRepository Receptores { get; }
+    public IClientRepository Clients { get; }
     public ITaxRegimeRepository TaxRegimes { get; }
     public ITenantUserRepository TenantUsers { get; }
 
     public TenantUnitOfWork(IHttpContextAccessor context, IClientRepository receptorRepository, ITaxRegimeRepository taxRegimeRepository, ITenantUserRepository tenantUserRepository)
     {
         dbContext = context.HttpContext.Items[Constants.HttpContextTenantDbContextKey] as TenantDbContext;
-        Receptores = receptorRepository;
+        Clients = receptorRepository;
         TaxRegimes = taxRegimeRepository;
         TenantUsers = tenantUserRepository;
     }

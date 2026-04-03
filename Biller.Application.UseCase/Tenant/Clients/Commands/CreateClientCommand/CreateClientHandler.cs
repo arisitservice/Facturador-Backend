@@ -1,6 +1,7 @@
 using Biller.Application.Infrastructure.Interface.Persistence;
 using Biller.Application.Models.Tenant.Clients;
 using Biller.Domain.Entities.Tenant;
+using Biller.Shared.ExtensionMethods;
 using MediatR;
 
 namespace Biller.Application.UseCase.Tenant.Clients.Commands.CreateClientCommand;
@@ -26,9 +27,9 @@ public class CreateClientHandler : IRequestHandler<CreateClientCommand, ClientDT
             BusinessName = request.BusinessName
         };
 
-        await _unitOfWork.Receptores.AddAsync(client);
+        await _unitOfWork.Clients.AddAsync(client);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return ClientDTO.FromEntity(client);
+        return client.CastTo<ClientDTO>();
     }
 }

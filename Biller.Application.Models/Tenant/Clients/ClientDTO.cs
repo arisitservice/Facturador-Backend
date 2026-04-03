@@ -10,16 +10,5 @@ public class ClientDTO
     public string Name { get; set; }
     public string BusinessName { get; set; }
     public string TaxId { get; set; }
-    public int TaxRegimeId { get; set; }
-
-    public static ClientDTO FromEntity(Client client) => new()
-    {
-        Id              = client.Id,
-        TaxAddress      = client.TaxAddress,
-        PostalCode      = client.PostalCode,
-        Name            = client.Name,
-        BusinessName    = client.BusinessName,
-        TaxId           = client.TaxId,
-        TaxRegimeId     = client.TaxRegimeId
-    };
+    public int? TaxRegimeId { get; set; }
 }

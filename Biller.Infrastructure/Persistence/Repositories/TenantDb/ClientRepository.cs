@@ -1,4 +1,5 @@
 using Biller.Application.Infrastructure.Interface.Persistence.Repositories.TenantDb;
+using Biller.Application.Models.Tenant.Clients;
 using Biller.Domain.Entities.Tenant;
 using Biller.Infrastructure.Persistence.Contexts;
 using Biller.Shared;
@@ -16,14 +17,15 @@ public class ClientRepository : IClientRepository
         dbContext = context.HttpContext.Items[Constants.HttpContextTenantDbContextKey] as TenantDbContext;
     }
 
+    public async Task<IEnumerable<ClientDTO>> GetAllAsync()
+    {
+        return await dbContext.Clients.AsNoTracking().Select(x => new ClientDTO() { Id = x.Id, Name = x.Name }).ToListAsync();
+    }
+
+
     public async Task<Client?> GetByIdAsync(int id)
     {
         return await dbContext.Clients.FindAsync(id);
-    }
-
-    public async Task<IEnumerable<Client>> GetAllAsync()
-    {
-        return await dbContext.Clients.ToListAsync();
     }
 
     public async Task AddAsync(Client receptor)

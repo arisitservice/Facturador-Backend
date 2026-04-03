@@ -4,7 +4,7 @@ namespace Biller.Application.Infrastructure.Interface.Persistence;
 
 public interface ITenantUnitOfWork
 {
-    IClientRepository Receptores { get; }
+    IClientRepository Clients { get; }
     ITaxRegimeRepository TaxRegimes { get; }
     ITenantUserRepository TenantUsers { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

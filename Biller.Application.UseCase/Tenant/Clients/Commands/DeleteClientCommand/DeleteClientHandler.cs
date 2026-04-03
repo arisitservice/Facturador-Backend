@@ -14,10 +14,10 @@ public class DeleteClientHandler : IRequestHandler<DeleteClientCommand>
 
     public async Task Handle(DeleteClientCommand request, CancellationToken cancellationToken)
     {
-        var client = await _unitOfWork.Receptores.GetByIdAsync(request.Id)
+        var client = await _unitOfWork.Clients.GetByIdAsync(request.Id)
             ?? throw new KeyNotFoundException($"Client with Id {request.Id} was not found.");
 
-        await _unitOfWork.Receptores.DeleteAsync(client.Id);
+        await _unitOfWork.Clients.DeleteAsync(client.Id);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
     }
 }

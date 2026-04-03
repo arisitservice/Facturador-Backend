@@ -1,3 +1,4 @@
+using Biller.Application.Models.Tenant.Clients;
 using Biller.Domain.Entities.Tenant;
 
 namespace Biller.Application.Infrastructure.Interface.Persistence.Repositories.TenantDb;
@@ -5,7 +6,7 @@ namespace Biller.Application.Infrastructure.Interface.Persistence.Repositories.T
 public interface IClientRepository
 {
     Task<Client?> GetByIdAsync(int id);
-    Task<IEnumerable<Client>> GetAllAsync();
+    Task<IEnumerable<ClientDTO>> GetAllAsync();
     Task AddAsync(Client receptor);
     Task UpdateAsync(Client receptor);
     Task DeleteAsync(int id);

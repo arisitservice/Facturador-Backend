@@ -15,7 +15,6 @@ public class GetAllClientsHandler : IRequestHandler<GetAllClientsQuery, IEnumera
 
     public async Task<IEnumerable<ClientDTO>> Handle(GetAllClientsQuery request, CancellationToken cancellationToken)
     {
-        var clients = await _unitOfWork.Receptores.GetAllAsync();
-        return clients.Select(ClientDTO.FromEntity);
+        return await _unitOfWork.Clients.GetAllAsync();
     }
 }

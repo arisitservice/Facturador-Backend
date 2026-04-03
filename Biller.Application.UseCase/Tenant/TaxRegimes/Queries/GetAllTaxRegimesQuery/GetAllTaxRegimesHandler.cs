@@ -1,5 +1,6 @@
 using Biller.Application.Infrastructure.Interface.Persistence;
 using Biller.Application.Models.Tenant.TaxRegimes;
+using Biller.Shared.ExtensionMethods;
 using MediatR;
 
 namespace Biller.Application.UseCase.Tenant.TaxRegimes.Queries.GetAllTaxRegimesQuery;
@@ -16,6 +17,6 @@ public class GetAllTaxRegimesHandler : IRequestHandler<GetAllTaxRegimesQuery, IE
     public async Task<IEnumerable<TaxRegimeDTO>> Handle(GetAllTaxRegimesQuery request, CancellationToken cancellationToken)
     {
         var taxRegimes = await _unitOfWork.TaxRegimes.GetAllAsync();
-        return taxRegimes.Select(TaxRegimeDTO.FromEntity);
+        return taxRegimes.Select(x => x.CastTo<TaxRegimeDTO>()).ToList();
     }
 }
