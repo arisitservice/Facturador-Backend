@@ -57,7 +57,8 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
-await ApplicationDbSeeder.SeedAsync(app.Services);
+var dbSeeder = new MainDbSeeder(app.Services);
+await dbSeeder.SeedAsync();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

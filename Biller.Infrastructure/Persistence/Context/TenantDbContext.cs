@@ -14,16 +14,16 @@ namespace Biller.Infrastructure.Persistence.Contexts
         public DbSet<Client> Clients { get; set; }
         public DbSet<TaxRegime> TaxRegimes { get; set; }
         public DbSet<TenantUser> TenantUsers { get; set; }
+        public DbSet<CfdiUse> CfdiUses { get; set; }
+        public DbSet<MeasurementUnit> MeasurementUnits { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<CancellationReason> CancellationReasons { get; set; }
+        public DbSet<Currency> Currencies { get; set; }
 
         //public DbSet<Domain.Entities.Emisor> Emisores { get; set; }
         //public DbSet<Domain.Entities.Cfdi> Cfdis { get; set; }
-        //public DbSet<Domain.Entities.UsoCfdi> UsosCfdi { get; set; }
-        //public DbSet<Domain.Entities.Moneda> Monedas { get; set; }
-        //public DbSet<Domain.Entities.UnidadMedida> UnidadesMedida { get; set; }
-        //public DbSet<Domain.Entities.Producto> Productos { get; set; }
         //public DbSet<Domain.Entities.CfdiConcepto> CfdiConceptos { get; set; }
         //public DbSet<Domain.Entities.CfdiComplementoPago> CfdiComplementosPago { get; set; }
-        //public DbSet<Domain.Entities.MotivoCancelacion> MotivosCancelacion { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -13,13 +13,32 @@ public class TenantUnitOfWork : ITenantUnitOfWork
     public IClientRepository Clients { get; }
     public ITaxRegimeRepository TaxRegimes { get; }
     public ITenantUserRepository TenantUsers { get; }
+    public ICfdiUseRepository CfdiUses { get; }
+    public IMeasurementUnitRepository MeasurementUnits { get; }
+    public IProductRepository Products { get; }
+    public ICancellationReasonRepository CancellationReasons { get; }
+    public ICurrencyRepository Currencies { get; }
 
-    public TenantUnitOfWork(IHttpContextAccessor context, IClientRepository receptorRepository, ITaxRegimeRepository taxRegimeRepository, ITenantUserRepository tenantUserRepository)
+    public TenantUnitOfWork(
+        IHttpContextAccessor context,
+        IClientRepository clientRepository,
+        ITaxRegimeRepository taxRegimeRepository,
+        ITenantUserRepository tenantUserRepository,
+        ICfdiUseRepository cfdiUseRepository,
+        IMeasurementUnitRepository measurementUnitRepository,
+        IProductRepository productRepository,
+        ICancellationReasonRepository cancellationReasonRepository,
+        ICurrencyRepository currencyRepository)
     {
         dbContext = context.HttpContext.Items[Constants.HttpContextTenantDbContextKey] as TenantDbContext;
-        Clients = receptorRepository;
+        Clients = clientRepository;
         TaxRegimes = taxRegimeRepository;
         TenantUsers = tenantUserRepository;
+        CfdiUses = cfdiUseRepository;
+        MeasurementUnits = measurementUnitRepository;
+        Products = productRepository;
+        CancellationReasons = cancellationReasonRepository;
+        Currencies = currencyRepository;
     }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

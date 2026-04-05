@@ -43,6 +43,11 @@ public static class ConfigureServices
         services.AddScoped<IClientRepository, ClientRepository>();
         services.AddScoped<ITaxRegimeRepository, TaxRegimeRepository>();
         services.AddScoped<ITenantUserRepository, TenantUserRepository>();
+        services.AddScoped<ICfdiUseRepository, CfdiUseRepository>();
+        services.AddScoped<IMeasurementUnitRepository, MeasurementUnitRepository>();
+        services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<ICancellationReasonRepository, CancellationReasonRepository>();
+        services.AddScoped<ICurrencyRepository, CurrencyRepository>();
         services.AddScoped<ITenantUnitOfWork, TenantUnitOfWork>();
 
 
