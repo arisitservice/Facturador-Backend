@@ -11,6 +11,8 @@ public class TenantUnitOfWork : ITenantUnitOfWork
     private readonly TenantDbContext dbContext;
 
     public IClientRepository Clients { get; }
+    public IClientTaxInfoRepository ClientTaxInfos { get; }
+    public IAccountTaxInfoRepository AccountTaxInfos { get; }
     public ITaxRegimeRepository TaxRegimes { get; }
     public ITenantUserRepository TenantUsers { get; }
     public ICfdiUseRepository CfdiUses { get; }
@@ -22,6 +24,8 @@ public class TenantUnitOfWork : ITenantUnitOfWork
     public TenantUnitOfWork(
         IHttpContextAccessor context,
         IClientRepository clientRepository,
+        IClientTaxInfoRepository clientTaxInfoRepository,
+        IAccountTaxInfoRepository accountTaxInfoRepository,
         ITaxRegimeRepository taxRegimeRepository,
         ITenantUserRepository tenantUserRepository,
         ICfdiUseRepository cfdiUseRepository,
@@ -32,6 +36,8 @@ public class TenantUnitOfWork : ITenantUnitOfWork
     {
         dbContext = context.HttpContext.Items[Constants.HttpContextTenantDbContextKey] as TenantDbContext;
         Clients = clientRepository;
+        ClientTaxInfos = clientTaxInfoRepository;
+        AccountTaxInfos = accountTaxInfoRepository;
         TaxRegimes = taxRegimeRepository;
         TenantUsers = tenantUserRepository;
         CfdiUses = cfdiUseRepository;

@@ -19,12 +19,7 @@ public class UpdateClientHandler : IRequestHandler<UpdateClientCommand, ClientDT
         var client = await _unitOfWork.Clients.GetByIdAsync(request.Id)
             ?? throw new KeyNotFoundException($"Client with Id {request.Id} was not found.");
 
-        client.Name         = request.Name;
-        client.TaxId        = request.TaxId;
-        client.PostalCode   = request.PostalCode;
-        client.TaxRegimeId  = request.TaxRegimeId;
-        client.TaxAddress   = request.TaxAddress;
-        client.BusinessName = request.BusinessName;
+        client.Name = request.Name;
 
         await _unitOfWork.Clients.UpdateAsync(client);
         await _unitOfWork.SaveChangesAsync(cancellationToken);

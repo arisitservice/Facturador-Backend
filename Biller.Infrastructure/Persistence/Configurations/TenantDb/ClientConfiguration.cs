@@ -10,16 +10,10 @@ public class ClientConfiguration : IEntityTypeConfiguration<Client>
     {
         builder.ToTable("Clients").HasKey(t => t.Id);
 
-
-        builder.Property(r => r.TaxAddress);
-        builder.Property(r => r.PostalCode).HasMaxLength(5);
-        builder.Property(r => r.Name).HasMaxLength(200);
-        builder.Property(r => r.BusinessName).HasMaxLength(200);
-        builder.Property(r => r.TaxId).HasMaxLength(50);
-
-        builder.HasOne(r => r.TaxRegime)
-            .WithMany(rf => rf.Clients)
-            .HasForeignKey(v => v.TaxRegimeId)
-            .OnDelete(DeleteBehavior.Restrict);
+        builder.Property(r => r.Name).HasMaxLength(200).IsRequired();
+        builder.Property(u => u.Created);
+        builder.Property(u => u.CreatedBy).HasMaxLength(256);
+        builder.Property(u => u.LastModified);
+        builder.Property(u => u.LastModifiedBy).HasMaxLength(256);
     }
 }

@@ -19,12 +19,19 @@ public class CreateClientHandler : IRequestHandler<CreateClientCommand, ClientDT
     {
         var client = new Client
         {
-            Name         = request.Name,
-            TaxId        = request.TaxId,
-            PostalCode   = request.PostalCode,
-            TaxRegimeId  = request.TaxRegimeId,
-            TaxAddress   = request.TaxAddress,
-            BusinessName = request.BusinessName
+            Name = request.Name,
+            ClientTaxInfos = new List<ClientTaxInfo>
+            {
+                new ClientTaxInfo
+                {
+                    TaxId        = request.TaxId,
+                    PostalCode   = request.PostalCode,
+                    TaxRegimeId  = request.TaxRegimeId,
+                    TaxAddress   = request.TaxAddress,
+                    BusinessName = request.BusinessName,
+                    Default      = true
+                }
+            }
         };
 
         await _unitOfWork.Clients.AddAsync(client);

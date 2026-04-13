@@ -1,9 +1,7 @@
 using Biller.Application.Infrastructure.Interface.Persistence.Repositories.TenantDb;
-using Biller.Application.Models.Tenant.Clients;
 using Biller.Domain.Entities.Tenant;
 using Biller.Infrastructure.Persistence.Contexts;
 using Biller.Shared;
-using Biller.Shared.ExtensionMethods;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,9 +16,13 @@ public class ClientRepository : IClientRepository
         dbContext = context.HttpContext.Items[Constants.HttpContextTenantDbContextKey] as TenantDbContext;
     }
 
-    public async Task<IEnumerable<ClientDTO>> GetAllAsync()
+    public async Task<IEnumerable<Client>> GetAllAsync()
     {
-        return await dbContext.Clients.AsNoTracking().Select(x => x.CastTo<ClientDTO>()).ToListAsync();
+        return await dbContext.Clients
+            .AsNoTracking()
+            .Include(c => c.ClientTaxInfos)
+            .ThenInclude(cti => cti.TaxRegime)
+            .ToListAsync();
     }
 
 

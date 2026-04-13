@@ -22,6 +22,102 @@ namespace Biller.Infrastructure.Persistence.Migrations.TenantDb
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Biller.Domain.Entities.Tenant.Account", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Company")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("TenantName")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Account", (string)null);
+                });
+
+            modelBuilder.Entity("Biller.Domain.Entities.Tenant.AccountTaxInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BusinessName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<bool>("Default")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("character varying(5)");
+
+                    b.Property<string>("TaxAddress")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<string>("TaxId")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.Property<int>("TaxRegimeId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TaxRegimeId");
+
+                    b.ToTable("AccountTaxInfos", (string)null);
+                });
+
             modelBuilder.Entity("Biller.Domain.Entities.Tenant.CancellationReason", b =>
                 {
                     b.Property<int>("Id")
@@ -86,18 +182,62 @@ namespace Biller.Infrastructure.Persistence.Migrations.TenantDb
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("BusinessName")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp with time zone");
 
-                    b.Property<bool>("CanEmitBill")
-                        .HasColumnType("boolean");
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clients", (string)null);
+                });
+
+            modelBuilder.Entity("Biller.Domain.Entities.Tenant.ClientTaxInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BusinessName")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<bool>("Default")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("PostalCode")
                         .IsRequired()
@@ -106,7 +246,8 @@ namespace Biller.Infrastructure.Persistence.Migrations.TenantDb
 
                     b.Property<string>("TaxAddress")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
 
                     b.Property<string>("TaxId")
                         .IsRequired()
@@ -118,9 +259,11 @@ namespace Biller.Infrastructure.Persistence.Migrations.TenantDb
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClientId");
+
                     b.HasIndex("TaxRegimeId");
 
-                    b.ToTable("Clients", (string)null);
+                    b.ToTable("ClientTaxInfos", (string)null);
                 });
 
             modelBuilder.Entity("Biller.Domain.Entities.Tenant.Currency", b =>
@@ -281,10 +424,10 @@ namespace Biller.Infrastructure.Persistence.Migrations.TenantDb
                     b.ToTable("TenantUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Biller.Domain.Entities.Tenant.Client", b =>
+            modelBuilder.Entity("Biller.Domain.Entities.Tenant.AccountTaxInfo", b =>
                 {
                     b.HasOne("Biller.Domain.Entities.Tenant.TaxRegime", "TaxRegime")
-                        .WithMany("Clients")
+                        .WithMany("AccountTaxInfos")
                         .HasForeignKey("TaxRegimeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -292,9 +435,35 @@ namespace Biller.Infrastructure.Persistence.Migrations.TenantDb
                     b.Navigation("TaxRegime");
                 });
 
+            modelBuilder.Entity("Biller.Domain.Entities.Tenant.ClientTaxInfo", b =>
+                {
+                    b.HasOne("Biller.Domain.Entities.Tenant.Client", "Client")
+                        .WithMany("ClientTaxInfos")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Biller.Domain.Entities.Tenant.TaxRegime", "TaxRegime")
+                        .WithMany("ClientTaxInfos")
+                        .HasForeignKey("TaxRegimeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+
+                    b.Navigation("TaxRegime");
+                });
+
+            modelBuilder.Entity("Biller.Domain.Entities.Tenant.Client", b =>
+                {
+                    b.Navigation("ClientTaxInfos");
+                });
+
             modelBuilder.Entity("Biller.Domain.Entities.Tenant.TaxRegime", b =>
                 {
-                    b.Navigation("Clients");
+                    b.Navigation("AccountTaxInfos");
+
+                    b.Navigation("ClientTaxInfos");
                 });
 #pragma warning restore 612, 618
         }

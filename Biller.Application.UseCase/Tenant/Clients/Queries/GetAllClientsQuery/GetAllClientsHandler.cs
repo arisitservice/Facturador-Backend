@@ -1,5 +1,6 @@
 using Biller.Application.Infrastructure.Interface.Persistence;
 using Biller.Application.Models.Tenant.Clients;
+using Biller.Shared.ExtensionMethods;
 using MediatR;
 
 namespace Biller.Application.UseCase.Tenant.Clients.Queries.GetAllClientsQuery;
@@ -15,6 +16,10 @@ public class GetAllClientsHandler : IRequestHandler<GetAllClientsQuery, IEnumera
 
     public async Task<IEnumerable<ClientDTO>> Handle(GetAllClientsQuery request, CancellationToken cancellationToken)
     {
-        return await _unitOfWork.Clients.GetAllAsync();
+        var clients = await _unitOfWork.Clients.GetAllAsync();
+
+        var clientsDTO = clients.Select(c => c.CastTo<ClientDTO>()).ToList();
+
+        return clientsDTO;
     }
 }

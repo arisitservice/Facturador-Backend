@@ -1,21 +1,11 @@
-﻿namespace Biller.Domain.Entities.Tenant;
+﻿using Biller.Domain.Entities.Common;
 
-public class Client
+namespace Biller.Domain.Entities.Tenant;
+
+public class Client: BaseAuditableEntity
 {
-    public int Id { get; set; }
-    public string TaxAddress { get; set; }
-    public string PostalCode { get; set; }
     public string Name { get; set; }
-    public string BusinessName { get; set; }
-    public string TaxId { get; set; }
-    public bool CanEmitBill { get; set; }
-
-
-    //Foreign Keys
-    public int TaxRegimeId { get; set; }
-
 
     //Relationships
-    //public IList<Cfdi> Cfdis { get; set; }
-    public TaxRegime TaxRegime { get; set; }
+    public IEnumerable<ClientTaxInfo> ClientTaxInfos { get; set; }
 }

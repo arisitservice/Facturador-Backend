@@ -23,4 +23,9 @@
     <ProjectReference Include="..\Biller.Domain\Biller.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Tenant\Account\Commands\" />
+    <Folder Include="Tenant\Account\Queries\" />
+  </ItemGroup>
+
 </Project>
