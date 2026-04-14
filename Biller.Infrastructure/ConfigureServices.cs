@@ -40,6 +40,7 @@ public static class ConfigureServices
         services.AddScoped<IMainUnitOfWork, MainUnitOfWork>();
 
         /*Tenant db context*/
+        services.AddScoped<IAccountRepository, AccountRepository>();
         services.AddScoped<IClientRepository, ClientRepository>();
         services.AddScoped<IClientTaxInfoRepository, ClientTaxInfoRepository>();
         services.AddScoped<IAccountTaxInfoRepository, AccountTaxInfoRepository>();

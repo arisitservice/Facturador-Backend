@@ -10,6 +10,7 @@ public class TenantUnitOfWork : ITenantUnitOfWork
 {
     private readonly TenantDbContext dbContext;
 
+    public IAccountRepository Accounts { get; }
     public IClientRepository Clients { get; }
     public IClientTaxInfoRepository ClientTaxInfos { get; }
     public IAccountTaxInfoRepository AccountTaxInfos { get; }
@@ -23,6 +24,7 @@ public class TenantUnitOfWork : ITenantUnitOfWork
 
     public TenantUnitOfWork(
         IHttpContextAccessor context,
+        IAccountRepository accountRepository,
         IClientRepository clientRepository,
         IClientTaxInfoRepository clientTaxInfoRepository,
         IAccountTaxInfoRepository accountTaxInfoRepository,
@@ -35,6 +37,7 @@ public class TenantUnitOfWork : ITenantUnitOfWork
         ICurrencyRepository currencyRepository)
     {
         dbContext = context.HttpContext.Items[Constants.HttpContextTenantDbContextKey] as TenantDbContext;
+        Accounts = accountRepository;
         Clients = clientRepository;
         ClientTaxInfos = clientTaxInfoRepository;
         AccountTaxInfos = accountTaxInfoRepository;

@@ -4,6 +4,7 @@ namespace Biller.Application.Infrastructure.Interface.Persistence;
 
 public interface ITenantUnitOfWork
 {
+    IAccountRepository Accounts { get; }
     IClientRepository Clients { get; }
     IClientTaxInfoRepository ClientTaxInfos { get; }
     IAccountTaxInfoRepository AccountTaxInfos { get; }
