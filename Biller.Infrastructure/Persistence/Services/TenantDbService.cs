@@ -10,7 +10,7 @@ namespace Biller.Infrastructure.Persistence.Services;
 public class TenantDbService : ITenantDbService
 {
   
-    public async Task Create(string connectionString, TenantUser owner)
+    public async Task Create(string connectionString, TenantUser owner, Account account)
     {
         var options = new DbContextOptionsBuilder<TenantDbContext>()
         .UseNpgsql(connectionString)
@@ -28,6 +28,7 @@ public class TenantDbService : ITenantDbService
         await SeedDefaultCurrencies(dbContext);
 
         await dbContext.TenantUsers.AddAsync(owner);
+        await dbContext.Account.AddAsync(account);
 
         await dbContext.SaveChangesAsync();
     }

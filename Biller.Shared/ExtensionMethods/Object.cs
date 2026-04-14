@@ -9,7 +9,13 @@ public static class Object
         if (source == null)
             throw new ArgumentNullException(nameof(source));
 
-        var json = JsonConvert.SerializeObject(source);
+        var settings = new JsonSerializerSettings
+        {
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            NullValueHandling = NullValueHandling.Ignore
+        };
+
+        var json = JsonConvert.SerializeObject(source, settings);
         return JsonConvert.DeserializeObject<T>(json!);
     }
 }

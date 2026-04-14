@@ -7,6 +7,6 @@ public class ClientDTO
     public int Id { get; set; }
     public string Name { get; set; }
 
-    public ClientTaxInfoDTO ClientTaxInfos { get; set; }
+    public IEnumerable<ClientTaxInfoDTO> ClientTaxInfos { get; set; }
 }
 

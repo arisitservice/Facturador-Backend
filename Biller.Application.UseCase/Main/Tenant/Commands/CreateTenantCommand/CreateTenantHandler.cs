@@ -51,7 +51,14 @@ public class CreateTenantHandler : IRequestHandler<CreateTenantCommand, TenantCr
             CreatedBy = request.Owner.Username
         };
 
-        await tenantDbService.Create(connectionString, owner);
+        var account = new Biller.Domain.Entities.Tenant.Account
+        {
+            TenantName = request.Tenant.Name,
+            Company = request.Tenant.Company,
+            Image = ""
+        };
+
+        await tenantDbService.Create(connectionString, owner, account);
 
 
         var tenant = new Domain.Entities.Main.Tenant
