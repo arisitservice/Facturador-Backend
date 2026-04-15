@@ -8,7 +8,7 @@ public class Cfdi
 
     public int Id { get; set; }
     public string UUID { get; set; }
-    public TipoComprobante TipoComprobante   { get; set; }
+    public ReceiptType     ReceiptType   { get; set; }
     public int?            IdFacturaRelacion  { get; set; }
     public int             IdReceptor         { get; set; }
     public int             IdEmisor         { get; set; }
@@ -28,7 +28,7 @@ public class Cfdi
     public ICollection<CfdiConcepto> Conceptos { get; set; }
     public ICollection<CfdiComplementoPago> ComplementosPago { get; set; }
 
-    public Client Receptor { get; set; }
-    public Emisor Emisor { get; set; }
+    public Client      Receptor { get; set; }
+    public TaxInfoBase Emisor   { get; set; }
 
 }

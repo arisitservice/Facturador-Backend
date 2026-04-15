@@ -7,4 +7,6 @@ public interface ITenantDbService
 {
     public Task Create(string connectionString, TenantUser owner, Account account);
     public Task Migrate(string connectionString);
+    public Task RollBack(string connectionString);
+
 }

@@ -3,6 +3,8 @@ using Biller.Domain.Entities.Tenant;
 using Biller.Domain.Enums;
 using Biller.Infrastructure.Persistence.Contexts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Options;
 
 namespace Biller.Infrastructure.Persistence.Services;
@@ -43,13 +45,21 @@ public class TenantDbService : ITenantDbService
 
         await dbContext.Database.MigrateAsync();
 
-        await SeedDefaultCfdiUses(dbContext);
-        await SeedDefaultMeasurementUnits(dbContext);
-        await SeedDefaultProducts(dbContext);
-        await SeedDefaultCancellationReasons(dbContext);
-        await SeedDefaultCurrencies(dbContext);
-
         await dbContext.SaveChangesAsync();
+    }
+
+    public async Task RollBack(string connectionString)
+    {
+        var options = new DbContextOptionsBuilder<TenantDbContext>()
+       .UseNpgsql(connectionString)
+       .Options;
+
+        using var dbContext = new TenantDbContext(options);
+
+        var migrator = dbContext.GetService<IMigrator>();
+
+        // Rollback a la migración anterior específica
+        await migrator.MigrateAsync("20260412234456_AddAccountTaxInfos");
     }
 
     private async Task SeedDefaultRegimes(TenantDbContext tenantDbContext)
