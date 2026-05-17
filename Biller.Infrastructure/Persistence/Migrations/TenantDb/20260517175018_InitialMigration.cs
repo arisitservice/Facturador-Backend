@@ -209,7 +209,7 @@ namespace Biller.Infrastructure.Persistence.Migrations.TenantDb
                     CfdiUseId = table.Column<int>(type: "integer", nullable: false),
                     CurrencyId = table.Column<int>(type: "integer", nullable: false),
                     ExchangeRate = table.Column<decimal>(type: "numeric(18,6)", precision: 18, scale: 6, nullable: false),
-                    PaymentMethodId = table.Column<int>(type: "integer", nullable: false),
+                    PaymentForm = table.Column<int>(type: "integer", nullable: false),
                     PaymentMethod = table.Column<string>(type: "character varying(3)", maxLength: 3, nullable: false),
                     ApplyTaxes = table.Column<int>(type: "integer", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),

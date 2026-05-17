@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Tenant\Account\**" />
+    <EmbeddedResource Remove="Tenant\Account\**" />
+    <None Remove="Tenant\Account\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.1.0" />
     <PackageReference Include="FluentValidation" Version="12.1.1" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
@@ -21,11 +27,6 @@
     <ProjectReference Include="..\Biller.Application.Infrastructure.Interface\Biller.Application.Infrastructure.Interface.csproj" />
     <ProjectReference Include="..\Biller.Application.Models\Biller.Application.Models.csproj" />
     <ProjectReference Include="..\Biller.Domain\Biller.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Tenant\Account\Commands\" />
-    <Folder Include="Tenant\Account\Queries\" />
   </ItemGroup>
 
 </Project>

@@ -136,13 +136,13 @@ namespace Biller.Infrastructure.Persistence.Migrations.TenantDb
                         .HasMaxLength(1000)
                         .HasColumnType("character varying(1000)");
 
+                    b.Property<int>("PaymentForm")
+                        .HasColumnType("integer");
+
                     b.Property<string>("PaymentMethod")
                         .IsRequired()
                         .HasMaxLength(3)
                         .HasColumnType("character varying(3)");
-
-                    b.Property<int>("PaymentMethodId")
-                        .HasColumnType("integer");
 
                     b.Property<int>("PaymentStatus")
                         .HasColumnType("integer");

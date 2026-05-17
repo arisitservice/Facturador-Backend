@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Biller.Infrastructure.Persistence.Migrations.TenantDb
 {
     [DbContext(typeof(TenantDbContext))]
-    [Migration("20260517163709_InitialMigration")]
+    [Migration("20260517175018_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -139,13 +139,13 @@ namespace Biller.Infrastructure.Persistence.Migrations.TenantDb
                         .HasMaxLength(1000)
                         .HasColumnType("character varying(1000)");
 
+                    b.Property<int>("PaymentForm")
+                        .HasColumnType("integer");
+
                     b.Property<string>("PaymentMethod")
                         .IsRequired()
                         .HasMaxLength(3)
                         .HasColumnType("character varying(3)");
-
-                    b.Property<int>("PaymentMethodId")
-                        .HasColumnType("integer");
 
                     b.Property<int>("PaymentStatus")
                         .HasColumnType("integer");

@@ -61,13 +61,13 @@ public class CreateIncomeInvoiceHandler : IRequestHandler<CreateIncomeInvoiceCom
             CfdiUseId = request.TaxInfo.InvoiceUsageId,
             CurrencyId = request.TaxInfo.PaymentCurrencyId,
             ExchangeRate = exchangeRate,
-            PaymentMethodId = paymentMethodId,
+            PaymentForm = paymentMethodId,
             PaymentMethod = request.TaxInfo.PaymentMethod,
             ApplyTaxes = applyTaxes,
             Status = Status.Active,
             StampingStatus = StampingStatus.Pending,
             PaymentStatus = PaymentStatus.Pending,
-            Created = DateTime.Now
+            Created = DateTime.UtcNow
         };
 
         if(request.ProductServices is not null)

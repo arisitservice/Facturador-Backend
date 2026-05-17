@@ -14,7 +14,7 @@ public class CfdiDTO
     public int CfdiUseId { get; set; }
     public int CurrencyId { get; set; }
     public decimal ExchangeRate { get; set; }
-    public int PaymentMethodId { get; set; }
+    public int PaymentForm { get; set; }
     public PaymentMethod PaymentMethod { get; set; }
     public ApplyTaxes ApplyTaxes { get; set; }
     public Status Status { get; set; }
