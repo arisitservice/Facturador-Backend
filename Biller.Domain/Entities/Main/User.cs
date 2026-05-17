@@ -2,7 +2,6 @@
 
 using Biller.Domain.Entities.Common;
 using Biller.Domain.Enums;
-using Biller.Domain.Enums.Tenant;
 
 namespace Biller.Domain.Entities.Main;
 

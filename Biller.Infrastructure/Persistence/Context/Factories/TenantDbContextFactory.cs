@@ -9,7 +9,7 @@ public class TenantDbContextFactory : IDesignTimeDbContextFactory<TenantDbContex
     public TenantDbContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<TenantDbContext>();
-        optionsBuilder.UseNpgsql("");
+        optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=Biller;Username=postgres;Password=YourStrongPassw0rd;SSL Mode=Disable");
 
         return new TenantDbContext(optionsBuilder.Options);
     }

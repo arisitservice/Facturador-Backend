@@ -6,8 +6,7 @@ public interface ITenantUnitOfWork
 {
     IAccountRepository Accounts { get; }
     IClientRepository Clients { get; }
-    IClientTaxInfoRepository ClientTaxInfos { get; }
-    IAccountTaxInfoRepository AccountTaxInfos { get; }
+    ITaxInfoRepository TaxInfos { get; }
     ITaxRegimeRepository TaxRegimes { get; }
     ITenantUserRepository TenantUsers { get; }
     ICfdiUseRepository CfdiUses { get; }
@@ -15,5 +14,8 @@ public interface ITenantUnitOfWork
     IProductRepository Products { get; }
     ICancellationReasonRepository CancellationReasons { get; }
     ICurrencyRepository Currencies { get; }
+    ICfdiRepository Cfdis { get; }
+    ICfdiConceptRepository CfdiConcepts { get; }
+    ICfdiPaymentComplementRepository CfdiPaymentComplements { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

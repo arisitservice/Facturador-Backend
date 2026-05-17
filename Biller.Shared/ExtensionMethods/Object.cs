@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Biller.Shared.ExtensionMethods;
 
@@ -12,10 +13,11 @@ public static class Object
         var settings = new JsonSerializerSettings
         {
             ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-            NullValueHandling = NullValueHandling.Ignore
+            NullValueHandling = NullValueHandling.Ignore,
+            Converters = new List<JsonConverter> { new StringEnumConverter() }
         };
 
         var json = JsonConvert.SerializeObject(source, settings);
-        return JsonConvert.DeserializeObject<T>(json!);
+        return JsonConvert.DeserializeObject<T>(json!, settings);
     }
 }

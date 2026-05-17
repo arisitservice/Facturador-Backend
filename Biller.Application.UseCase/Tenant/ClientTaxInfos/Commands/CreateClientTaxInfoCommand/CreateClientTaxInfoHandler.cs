@@ -1,6 +1,7 @@
 using Biller.Application.Infrastructure.Interface.Persistence;
 using Biller.Application.Models.Tenant.Clients;
 using Biller.Domain.Entities.Tenant;
+using Biller.Domain.Enums.Tenant;
 using Biller.Shared.ExtensionMethods;
 using MediatR;
 
@@ -17,7 +18,7 @@ public class CreateClientTaxInfoHandler : IRequestHandler<CreateClientTaxInfoCom
 
     public async Task<ClientTaxInfoDTO> Handle(CreateClientTaxInfoCommand request, CancellationToken cancellationToken)
     {
-        var clientTaxInfo = new ClientTaxInfo
+        var taxInfo = new TaxInfo
         {
             TaxAddress   = request.TaxAddress,
             PostalCode   = request.PostalCode,
@@ -25,12 +26,13 @@ public class CreateClientTaxInfoHandler : IRequestHandler<CreateClientTaxInfoCom
             TaxId        = request.TaxId,
             Default      = request.Default,
             ClientId     = request.ClientId,
-            TaxRegimeId  = request.TaxRegimeId
+            TaxRegimeId  = request.TaxRegimeId,
+            Type         = TaxInfoType.Client
         };
 
-        await _unitOfWork.ClientTaxInfos.AddAsync(clientTaxInfo);
+        await _unitOfWork.TaxInfos.AddAsync(taxInfo);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return clientTaxInfo.CastTo<ClientTaxInfoDTO>();
+        return taxInfo.CastTo<ClientTaxInfoDTO>();
     }
 }

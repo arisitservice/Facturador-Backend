@@ -12,8 +12,7 @@ public class TenantUnitOfWork : ITenantUnitOfWork
 
     public IAccountRepository Accounts { get; }
     public IClientRepository Clients { get; }
-    public IClientTaxInfoRepository ClientTaxInfos { get; }
-    public IAccountTaxInfoRepository AccountTaxInfos { get; }
+    public ITaxInfoRepository TaxInfos { get; }
     public ITaxRegimeRepository TaxRegimes { get; }
     public ITenantUserRepository TenantUsers { get; }
     public ICfdiUseRepository CfdiUses { get; }
@@ -21,26 +20,30 @@ public class TenantUnitOfWork : ITenantUnitOfWork
     public IProductRepository Products { get; }
     public ICancellationReasonRepository CancellationReasons { get; }
     public ICurrencyRepository Currencies { get; }
+    public ICfdiRepository Cfdis { get; }
+    public ICfdiConceptRepository CfdiConcepts { get; }
+    public ICfdiPaymentComplementRepository CfdiPaymentComplements { get; }
 
     public TenantUnitOfWork(
         IHttpContextAccessor context,
         IAccountRepository accountRepository,
         IClientRepository clientRepository,
-        IClientTaxInfoRepository clientTaxInfoRepository,
-        IAccountTaxInfoRepository accountTaxInfoRepository,
+        ITaxInfoRepository taxInfoRepository,
         ITaxRegimeRepository taxRegimeRepository,
         ITenantUserRepository tenantUserRepository,
         ICfdiUseRepository cfdiUseRepository,
         IMeasurementUnitRepository measurementUnitRepository,
         IProductRepository productRepository,
         ICancellationReasonRepository cancellationReasonRepository,
-        ICurrencyRepository currencyRepository)
+        ICurrencyRepository currencyRepository,
+        ICfdiRepository cfdiRepository,
+        ICfdiConceptRepository cfdiConceptRepository,
+        ICfdiPaymentComplementRepository cfdiPaymentComplementRepository)
     {
         dbContext = context.HttpContext.Items[Constants.HttpContextTenantDbContextKey] as TenantDbContext;
         Accounts = accountRepository;
         Clients = clientRepository;
-        ClientTaxInfos = clientTaxInfoRepository;
-        AccountTaxInfos = accountTaxInfoRepository;
+        TaxInfos = taxInfoRepository;
         TaxRegimes = taxRegimeRepository;
         TenantUsers = tenantUserRepository;
         CfdiUses = cfdiUseRepository;
@@ -48,6 +51,9 @@ public class TenantUnitOfWork : ITenantUnitOfWork
         Products = productRepository;
         CancellationReasons = cancellationReasonRepository;
         Currencies = currencyRepository;
+        Cfdis = cfdiRepository;
+        CfdiConcepts = cfdiConceptRepository;
+        CfdiPaymentComplements = cfdiPaymentComplementRepository;
     }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

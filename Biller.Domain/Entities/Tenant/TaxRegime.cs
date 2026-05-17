@@ -10,5 +10,5 @@ public class TaxRegime
     public Status Status { get; set; }
 
     //Relationships
-    public IList<TaxInfoBase> TaxInfoBases { get; set; }
+    public IList<TaxInfo> TaxInfos { get; set; }
 }

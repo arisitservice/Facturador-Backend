@@ -42,8 +42,10 @@ public static class ConfigureServices
         /*Tenant db context*/
         services.AddScoped<IAccountRepository, AccountRepository>();
         services.AddScoped<IClientRepository, ClientRepository>();
-        services.AddScoped<IClientTaxInfoRepository, ClientTaxInfoRepository>();
-        services.AddScoped<IAccountTaxInfoRepository, AccountTaxInfoRepository>();
+        services.AddScoped<ICfdiRepository, CfdiRepository>();
+        services.AddScoped<ICfdiConceptRepository, CfdiConceptRepository>();
+        services.AddScoped<ICfdiPaymentComplementRepository, CfdiPaymentComplementRepository>();
+        services.AddScoped<ITaxInfoRepository, TaxInfoRepository>();
         services.AddScoped<ITaxRegimeRepository, TaxRegimeRepository>();
         services.AddScoped<ITenantUserRepository, TenantUserRepository>();
         services.AddScoped<ICfdiUseRepository, CfdiUseRepository>();

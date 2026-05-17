@@ -1,6 +1,7 @@
 using Biller.Application.Infrastructure.Interface.Persistence;
 using Biller.Application.Models.Tenant.Clients;
 using Biller.Domain.Entities.Tenant;
+using Biller.Domain.Enums.Tenant;
 using Biller.Shared.ExtensionMethods;
 using MediatR;
 
@@ -20,16 +21,17 @@ public class CreateClientHandler : IRequestHandler<CreateClientCommand, ClientDT
         var client = new Client
         {
             Name = request.Name,
-            ClientTaxInfos = new List<ClientTaxInfo>
+            TaxInfos = new List<TaxInfo>
             {
-                new ClientTaxInfo
+                new TaxInfo
                 {
                     TaxId        = request.TaxId,
                     PostalCode   = request.PostalCode,
                     TaxRegimeId  = request.TaxRegimeId,
                     TaxAddress   = request.TaxAddress,
                     BusinessName = request.BusinessName,
-                    Default      = true
+                    Default      = true,
+                    Type         = TaxInfoType.Client
                 }
             }
         };

@@ -11,11 +11,12 @@ namespace Biller.Infrastructure.Persistence.Contexts
         public TenantDbContext(DbContextOptions<TenantDbContext> options) : base(options)
         {}
 
-        public DbSet<Client>         Clients         { get; set; }
-        public DbSet<TaxInfoBase>    TaxInfoBases    { get; set; }
-        public DbSet<ClientTaxInfo>  ClientTaxInfos  { get; set; }
-        public DbSet<AccountTaxInfo> AccountTaxInfos { get; set; }
-        public DbSet<TaxRegime>          TaxRegimes      { get; set; }
+        public DbSet<Client>                  Clients                 { get; set; }
+        public DbSet<TaxInfo>                 TaxInfos                { get; set; }
+        public DbSet<TaxRegime>               TaxRegimes              { get; set; }
+        public DbSet<Cfdi>                    Cfdis                   { get; set; }
+        public DbSet<CfdiConcept>             CfdiConcepts            { get; set; }
+        public DbSet<CfdiPaymentComplement>   CfdiPaymentComplements  { get; set; }
         public DbSet<TenantUser>         TenantUsers     { get; set; }
         public DbSet<CfdiUse>            CfdiUses        { get; set; }
         public DbSet<MeasurementUnit>    MeasurementUnits { get; set; }

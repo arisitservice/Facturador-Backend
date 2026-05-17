@@ -14,10 +14,10 @@ public class DeleteClientTaxInfoHandler : IRequestHandler<DeleteClientTaxInfoCom
 
     public async Task Handle(DeleteClientTaxInfoCommand request, CancellationToken cancellationToken)
     {
-        var clientTaxInfo = await _unitOfWork.ClientTaxInfos.GetByIdAsync(request.Id)
+        var clientTaxInfo = await _unitOfWork.TaxInfos.GetByIdAsync(request.Id)
             ?? throw new KeyNotFoundException($"ClientTaxInfo with Id {request.Id} was not found.");
 
-        await _unitOfWork.ClientTaxInfos.DeleteAsync(clientTaxInfo.Id);
+        await _unitOfWork.TaxInfos.DeleteAsync(clientTaxInfo.Id);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
     }
 }

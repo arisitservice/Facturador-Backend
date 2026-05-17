@@ -1,7 +1,7 @@
 namespace Biller.Domain.Enums;
 
-public enum ObjetoImpuesto
+public enum ApplyTaxes
 {
-    NoAplica = 1,
-    SiAplica = 2
+    Yes = 1,
+    No = 2
 }

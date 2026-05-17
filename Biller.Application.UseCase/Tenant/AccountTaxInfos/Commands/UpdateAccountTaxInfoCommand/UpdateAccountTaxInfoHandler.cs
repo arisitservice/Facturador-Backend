@@ -16,7 +16,7 @@ public class UpdateAccountTaxInfoHandler : IRequestHandler<UpdateAccountTaxInfoC
 
     public async Task<AccountTaxInfoDTO> Handle(UpdateAccountTaxInfoCommand request, CancellationToken cancellationToken)
     {
-        var accountTaxInfo = await _unitOfWork.AccountTaxInfos.GetByIdAsync(request.Id)
+        var accountTaxInfo = await _unitOfWork.TaxInfos.GetByIdAsync(request.Id)
             ?? throw new KeyNotFoundException($"AccountTaxInfo with Id {request.Id} was not found.");
 
         accountTaxInfo.TaxAddress   = request.TaxAddress;
@@ -26,7 +26,7 @@ public class UpdateAccountTaxInfoHandler : IRequestHandler<UpdateAccountTaxInfoC
         accountTaxInfo.Default      = request.Default;
         accountTaxInfo.TaxRegimeId  = request.TaxRegimeId;
 
-        await _unitOfWork.AccountTaxInfos.UpdateAsync(accountTaxInfo);
+        await _unitOfWork.TaxInfos.UpdateAsync(accountTaxInfo);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return accountTaxInfo.CastTo<AccountTaxInfoDTO>();

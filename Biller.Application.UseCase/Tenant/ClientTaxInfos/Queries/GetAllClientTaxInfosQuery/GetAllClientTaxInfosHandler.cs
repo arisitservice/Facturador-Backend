@@ -16,7 +16,7 @@ public class GetAllClientTaxInfosHandler : IRequestHandler<GetAllClientTaxInfosQ
 
     public async Task<IEnumerable<ClientTaxInfoDTO>> Handle(GetAllClientTaxInfosQuery request, CancellationToken cancellationToken)
     {
-        var clientTaxInfos = await _unitOfWork.ClientTaxInfos.GetAllByClientIdAsync(request.ClientId);
+        var clientTaxInfos = await _unitOfWork.TaxInfos.GetAllByClientIdAsync(request.ClientId);
 
         return clientTaxInfos.Select(c => c.CastTo<ClientTaxInfoDTO>()).ToList();
     }

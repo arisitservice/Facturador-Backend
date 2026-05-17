@@ -91,6 +91,239 @@ namespace Biller.Infrastructure.Persistence.Migrations.TenantDb
                     b.ToTable("CancellationReasons", (string)null);
                 });
 
+            modelBuilder.Entity("Biller.Domain.Entities.Tenant.Cfdi", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ApplyTaxes")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CfdiUseId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<int>("CurrencyId")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("ExchangeRate")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("numeric(18,6)");
+
+                    b.Property<int?>("InvoiceRelatedId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IssuerId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("Notes")
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<string>("PaymentMethod")
+                        .IsRequired()
+                        .HasMaxLength(3)
+                        .HasColumnType("character varying(3)");
+
+                    b.Property<int>("PaymentMethodId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PaymentStatus")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ReceiptType")
+                        .IsRequired()
+                        .HasMaxLength(1)
+                        .HasColumnType("character varying(1)");
+
+                    b.Property<int>("ReceiverId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StampingStatus")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UUID")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CfdiUseId");
+
+                    b.HasIndex("CurrencyId");
+
+                    b.HasIndex("IssuerId");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.ToTable("Cfdis", (string)null);
+                });
+
+            modelBuilder.Entity("Biller.Domain.Entities.Tenant.CfdiConcept", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("numeric(18,6)");
+
+                    b.Property<int>("CfdiId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("character varying(1000)");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<int>("MeasurementUnitId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("Quantity")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("numeric(18,6)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("TaxTransfer")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("numeric(18,6)");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("numeric(18,6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CfdiId");
+
+                    b.HasIndex("MeasurementUnitId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CfdiConcepts", (string)null);
+                });
+
+            modelBuilder.Entity("Biller.Domain.Entities.Tenant.CfdiPaymentComplement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ApplyTaxes")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CfdiId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<int>("CurrencyId")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("Equivalence")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("numeric(18,6)");
+
+                    b.Property<decimal>("ExchangeRate")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("numeric(18,6)");
+
+                    b.Property<DateTime?>("LastModified")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("OperationNumber")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<decimal>("OutstandingPaidAmount")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("numeric(18,6)");
+
+                    b.Property<decimal>("PaidAmount")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("numeric(18,6)");
+
+                    b.Property<int>("PartialityNumber")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("PaymentDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("PaymentMethodId")
+                        .HasColumnType("integer");
+
+                    b.Property<decimal>("PreviousBalanceAmount")
+                        .HasPrecision(18, 6)
+                        .HasColumnType("numeric(18,6)");
+
+                    b.Property<string>("Series")
+                        .HasMaxLength(25)
+                        .HasColumnType("character varying(25)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CfdiId");
+
+                    b.HasIndex("CurrencyId");
+
+                    b.ToTable("CfdiPaymentComplements", (string)null);
+                });
+
             modelBuilder.Entity("Biller.Domain.Entities.Tenant.CfdiUse", b =>
                 {
                     b.Property<int>("Id")
@@ -233,7 +466,7 @@ namespace Biller.Infrastructure.Persistence.Migrations.TenantDb
                     b.ToTable("Products", (string)null);
                 });
 
-            modelBuilder.Entity("Biller.Domain.Entities.Tenant.TaxInfoBase", b =>
+            modelBuilder.Entity("Biller.Domain.Entities.Tenant.TaxInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -245,6 +478,9 @@ namespace Biller.Infrastructure.Persistence.Migrations.TenantDb
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
+
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp with time zone");
@@ -281,13 +517,16 @@ namespace Biller.Infrastructure.Persistence.Migrations.TenantDb
                     b.Property<int>("TaxRegimeId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("Type")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("TaxRegimeId");
 
-                    b.ToTable("TaxInfoBases", (string)null);
-
-                    b.UseTptMappingStrategy();
+                    b.ToTable("TaxInfos", (string)null);
                 });
 
             modelBuilder.Entity("Biller.Domain.Entities.Tenant.TaxRegime", b =>
@@ -366,70 +605,120 @@ namespace Biller.Infrastructure.Persistence.Migrations.TenantDb
                     b.ToTable("TenantUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Biller.Domain.Entities.Tenant.AccountTaxInfo", b =>
+            modelBuilder.Entity("Biller.Domain.Entities.Tenant.Cfdi", b =>
                 {
-                    b.HasBaseType("Biller.Domain.Entities.Tenant.TaxInfoBase");
+                    b.HasOne("Biller.Domain.Entities.Tenant.CfdiUse", "CfdiUse")
+                        .WithMany()
+                        .HasForeignKey("CfdiUseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.ToTable("AccountTaxInfos", (string)null);
+                    b.HasOne("Biller.Domain.Entities.Tenant.Currency", "Currency")
+                        .WithMany()
+                        .HasForeignKey("CurrencyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Biller.Domain.Entities.Tenant.TaxInfo", "Issuer")
+                        .WithMany()
+                        .HasForeignKey("IssuerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Biller.Domain.Entities.Tenant.TaxInfo", "Receiver")
+                        .WithMany()
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("CfdiUse");
+
+                    b.Navigation("Currency");
+
+                    b.Navigation("Issuer");
+
+                    b.Navigation("Receiver");
                 });
 
-            modelBuilder.Entity("Biller.Domain.Entities.Tenant.ClientTaxInfo", b =>
+            modelBuilder.Entity("Biller.Domain.Entities.Tenant.CfdiConcept", b =>
                 {
-                    b.HasBaseType("Biller.Domain.Entities.Tenant.TaxInfoBase");
+                    b.HasOne("Biller.Domain.Entities.Tenant.Cfdi", "Cfdi")
+                        .WithMany("CfdiConcepts")
+                        .HasForeignKey("CfdiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<int>("ClientId")
-                        .HasColumnType("integer");
+                    b.HasOne("Biller.Domain.Entities.Tenant.MeasurementUnit", "MeasurementUnit")
+                        .WithMany()
+                        .HasForeignKey("MeasurementUnitId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.HasIndex("ClientId");
+                    b.HasOne("Biller.Domain.Entities.Tenant.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.ToTable("ClientTaxInfos", (string)null);
+                    b.Navigation("Cfdi");
+
+                    b.Navigation("MeasurementUnit");
+
+                    b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Biller.Domain.Entities.Tenant.TaxInfoBase", b =>
+            modelBuilder.Entity("Biller.Domain.Entities.Tenant.CfdiPaymentComplement", b =>
                 {
+                    b.HasOne("Biller.Domain.Entities.Tenant.Cfdi", "Cfdi")
+                        .WithMany("CfdiPaymentComplements")
+                        .HasForeignKey("CfdiId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Biller.Domain.Entities.Tenant.Currency", "Currency")
+                        .WithMany()
+                        .HasForeignKey("CurrencyId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Cfdi");
+
+                    b.Navigation("Currency");
+                });
+
+            modelBuilder.Entity("Biller.Domain.Entities.Tenant.TaxInfo", b =>
+                {
+                    b.HasOne("Biller.Domain.Entities.Tenant.Client", "Client")
+                        .WithMany("TaxInfos")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Biller.Domain.Entities.Tenant.TaxRegime", "TaxRegime")
-                        .WithMany("TaxInfoBases")
+                        .WithMany("TaxInfos")
                         .HasForeignKey("TaxRegimeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.Navigation("Client");
+
                     b.Navigation("TaxRegime");
                 });
 
-            modelBuilder.Entity("Biller.Domain.Entities.Tenant.AccountTaxInfo", b =>
+            modelBuilder.Entity("Biller.Domain.Entities.Tenant.Cfdi", b =>
                 {
-                    b.HasOne("Biller.Domain.Entities.Tenant.TaxInfoBase", null)
-                        .WithOne()
-                        .HasForeignKey("Biller.Domain.Entities.Tenant.AccountTaxInfo", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                    b.Navigation("CfdiConcepts");
 
-            modelBuilder.Entity("Biller.Domain.Entities.Tenant.ClientTaxInfo", b =>
-                {
-                    b.HasOne("Biller.Domain.Entities.Tenant.Client", "Client")
-                        .WithMany("ClientTaxInfos")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Biller.Domain.Entities.Tenant.TaxInfoBase", null)
-                        .WithOne()
-                        .HasForeignKey("Biller.Domain.Entities.Tenant.ClientTaxInfo", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Client");
+                    b.Navigation("CfdiPaymentComplements");
                 });
 
             modelBuilder.Entity("Biller.Domain.Entities.Tenant.Client", b =>
                 {
-                    b.Navigation("ClientTaxInfos");
+                    b.Navigation("TaxInfos");
                 });
 
             modelBuilder.Entity("Biller.Domain.Entities.Tenant.TaxRegime", b =>
                 {
-                    b.Navigation("TaxInfoBases");
+                    b.Navigation("TaxInfos");
                 });
 #pragma warning restore 612, 618
         }

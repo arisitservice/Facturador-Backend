@@ -16,7 +16,7 @@ public class GetAccountTaxInfoByIdHandler : IRequestHandler<GetAccountTaxInfoByI
 
     public async Task<AccountTaxInfoDTO?> Handle(GetAccountTaxInfoByIdQuery request, CancellationToken cancellationToken)
     {
-        var accountTaxInfo = await _unitOfWork.AccountTaxInfos.GetByIdAsync(request.Id);
+        var accountTaxInfo = await _unitOfWork.TaxInfos.GetByIdAsync(request.Id);
 
         return accountTaxInfo is null ? null : accountTaxInfo.CastTo<AccountTaxInfoDTO>();
     }

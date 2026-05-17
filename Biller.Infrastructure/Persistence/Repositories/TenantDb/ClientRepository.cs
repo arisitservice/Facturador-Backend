@@ -20,7 +20,7 @@ public class ClientRepository : IClientRepository
     {
         return await dbContext.Clients
             .AsNoTracking()
-            .Include(c => c.ClientTaxInfos)
+            .Include(c => c.TaxInfos)
             .ThenInclude(cti => cti.TaxRegime)
             .ToListAsync();
     }

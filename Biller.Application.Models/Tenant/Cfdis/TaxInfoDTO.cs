@@ -1,9 +1,9 @@
 using Biller.Application.Models.Tenant.TaxRegimes;
 using Biller.Domain.Enums.Tenant;
 
-namespace Biller.Application.Models.Tenant.Clients;
+namespace Biller.Application.Models.Tenant.Cfdis;
 
-public class ClientTaxInfoDTO
+public class TaxInfoDTO
 {
     public int Id { get; set; }
     public string TaxAddress { get; set; }

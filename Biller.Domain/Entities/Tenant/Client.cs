@@ -7,5 +7,5 @@ public class Client: BaseAuditableEntity
     public string Name { get; set; }
 
     //Relationships
-    public IEnumerable<ClientTaxInfo> ClientTaxInfos { get; set; }
+    public IEnumerable<TaxInfo> TaxInfos { get; set; }
 }
